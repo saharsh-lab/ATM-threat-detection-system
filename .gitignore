@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+venv_mac/
+.venv/
+env/
+
+# Nested / unrelated directories
+ATM-Threat-Detection-System/
+content-recommendation-engine/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# YOLO training outputs
+runs/
+weights/
+
+# Datasets
+datasets/
+dataset/
+
+# Logs & temp
+*.log
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ATM Threat Monitoring Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-left">
+    <span class="dot red"></span>
+    <span class="dot yellow"></span>
+    <span class="dot green"></span>
+    <span class="header-title">ATM THREAT MONITORING SYSTEM</span>
+  </div>
+  <div class="header-right">
+    <span id="clock">--:-- --</span>
+    <span class="badge-live">● LIVE</span>
+  </div>
+</header>
+
+<!-- ── Main Grid ──────────────────────────────────────────────────────── -->
+<main class="grid">
+
+  <!-- Column 1 : Video + Controls -->
+<section class="panel video-panel">
+
+  <div class="panel-title">CCTV FEED</div>
+
+  <!-- Video Area -->
+  <div class="video-wrapper">
+
+    <img id="video-stream" src="/video_feed" alt="Live Feed"/>
+
+    <!-- Ground Truth Badge -->
+    <div class="video-overlay">
+      <span id="gt-badge" class="gt-badge hidden">
+        GT: ANOMALOUS
+      </span>
+    </div>
+
+    <!-- Police Alert Banner -->
+    <div id="police-alert" class="police-alert hidden">
+      <span class="alert-icon">🚨</span>
+      ALERT SENT TO NEAREST POLICE STATION
+      <span class="alert-icon">🚨</span>
+    </div>
+
+  </div> <!-- END video-wrapper -->
+
+
+  <!-- Video Selector -->
+  <div class="video-selector">
+
+    <label for="video-select">Switch Video</label>
+
+    <select id="video-select">
+      {% for v in videos %}
+      <option value="{{ v }}">{{ v }}</option>
+      {% endfor %}
+    </select>
+
+    <button id="switch-btn">
+      Load
+    </button>
+
+  </div>
+
+</section>
+  <!-- Column 2 : Threat Info -->
+  <section class="panel threat-panel">
+
+    <!-- Threat Score -->
+    <div class="sub-panel score-panel">
+      <div class="panel-title">THREAT SCORE</div>
+      <div class="score-ring-wrapper">
+        <svg viewBox="0 0 120 120" class="score-ring">
+          <circle cx="60" cy="60" r="50" class="ring-bg"/>
+          <circle cx="60" cy="60" r="50" class="ring-fill" id="ring-fill"/>
+        </svg>
+        <div class="score-value-overlay">
+          <span id="score-value">0</span>
+          <span class="score-max">/100</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risk Level -->
+    <div class="sub-panel risk-panel">
+      <div class="panel-title">RISK LEVEL</div>
+      <div id="risk-badge" class="risk-badge">NORMAL</div>
+    </div>
+
+    <!-- Reasons -->
+    <div class="sub-panel reasons-panel">
+      <div class="panel-title">ACTIVE THREATS</div>
+      <ul id="reasons-list" class="reasons-list">
+        <li class="no-threat">No threats detected</li>
+      </ul>
+    </div>
+
+    <!-- Stats -->
+    <div class="sub-panel stats-panel">
+      <div class="panel-title">DETECTION STATS</div>
+      <div class="stats-grid">
+        <div class="stat"><span id="stat-persons">0</span><label>Persons</label></div>
+        <div class="stat"><span id="stat-bags">0</span><label>Bags</label></div>
+        <div class="stat"><span id="stat-frame">0</span><label>Frame</label></div>
+        <div class="stat"><span id="stat-gt">—</span><label>Ground Truth</label></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Column 3 : Event Log -->
+  <section class="panel log-panel">
+    <div class="panel-title">EVENT LOG</div>
+    <ul id="event-log" class="event-log">
+      <li class="log-empty">Monitoring started…</li>
+    </ul>
+  </section>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
