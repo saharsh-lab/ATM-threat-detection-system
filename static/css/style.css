@@ -91,16 +91,26 @@ body {
   border-radius: 4px;
   overflow: hidden;
 }
-#video-stream {
+#video-stream,
+#video-player {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
+#cctv-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
 .video-overlay {
   position: absolute;
   bottom: 8px;
   left: 8px;
+  z-index: 10;
 }
 .gt-badge {
   background: rgba(220,20,60,0.8);
