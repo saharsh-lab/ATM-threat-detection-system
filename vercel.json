@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "api/index.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "excludeFiles": "{data/**,venv/**,venv_mac/**,ATM-Threat-Detection-System/**,content-recommendation-engine/**,*.pt,export_timeline.py}"
+      }
     }
   ],
   "routes": [
