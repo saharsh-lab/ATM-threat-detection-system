@@ -3,125 +3,249 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ATM Threat Monitoring Dashboard</title>
+  <title>ATM Threat Monitoring Sentinel — AI Computer Vision</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
+<!-- ── Tactical Emergency Alert Banner (Dedicated Banner, Never Covers Controls) ── -->
+<div id="police-alert" class="police-alert hidden">
+  <div class="alert-content">
+    <span class="alert-pulse-icon">🚨</span>
+    <div class="alert-text-block">
+      <span class="alert-title">PRIORITY 1 CRITICAL SECURITY ALERT</span>
+      <span class="alert-desc">AUTOMATED DISPATCH TRANSMITTED TO LOCAL POLICE PRECINCT & SECURITY DISPATCH HUB</span>
+    </div>
+    <span class="alert-badge">CODE RED</span>
+  </div>
+</div>
+
 <!-- ── Header ─────────────────────────────────────────────────────────── -->
 <header class="header">
   <div class="header-left">
-    <span class="dot red"></span>
-    <span class="dot yellow"></span>
-    <span class="dot green"></span>
-    <span class="header-title">ATM THREAT MONITORING SYSTEM</span>
+    <div class="brand-badge">
+      <span class="radar-dot"></span>
+      <span class="brand-name">AEGIS SENTINEL</span>
+      <span class="brand-sub">ATM AI VISION v8.4</span>
+    </div>
   </div>
+
+  <!-- Camera Selector Toolbar (Elevated to top, always accessible!) -->
+  <div class="cam-toolbar">
+    <span class="toolbar-label">FEED SELECT:</span>
+    <div class="cam-chips" id="cam-chips">
+      <button class="cam-chip active" data-video="28.mp4">
+        <span class="chip-status red"></span>Cam 01: Vandalism (28)
+      </button>
+      <button class="cam-chip" data-video="12.mp4">
+        <span class="chip-status green"></span>Cam 02: Normal (12)
+      </button>
+      <button class="cam-chip" data-video="30a.mp4">
+        <span class="chip-status red"></span>Cam 03: Robbery (30a)
+      </button>
+      <button class="cam-chip" data-video="57.mp4">
+        <span class="chip-status yellow"></span>Cam 04: Zone Breach (57)
+      </button>
+      <button class="cam-chip" data-video="3.mp4">
+        <span class="chip-status red"></span>Cam 05: Anomaly (3)
+      </button>
+    </div>
+
+    <!-- Dropdown fallback for any additional video files -->
+    <div class="custom-video-select">
+      <select id="video-select">
+        {% for v in videos %}
+        <option value="{{ v }}" {% if v == '28.mp4' %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+      <button id="switch-btn" title="Load selected camera feed">Switch</button>
+    </div>
+  </div>
+
   <div class="header-right">
-    <span id="clock">--:-- --</span>
-    <span class="badge-live">● LIVE</span>
+    <div class="status-indicator">
+      <span class="pulse-indicator"></span>
+      <span class="status-text">LIVE STREAM</span>
+    </div>
+    <div class="clock-display" id="clock">--:--:-- --</div>
   </div>
 </header>
 
-<!-- ── Main Grid ──────────────────────────────────────────────────────── -->
+<!-- ── Main Command Center Grid ───────────────────────────────────────── -->
 <main class="grid">
 
-  <!-- Column 1 : Video + Controls -->
-<section class="panel video-panel">
-
-  <div class="panel-title">CCTV FEED</div>
-
-  <!-- Video Area -->
-  <div class="video-wrapper">
-
-    <img id="video-stream" src="/video_feed" alt="Live Feed" style="display:none;"/>
-    <video id="video-player" playsinline autoplay muted loop preload="auto" style="display:none;"></video>
-    <canvas id="cctv-canvas" style="display:none;"></canvas>
-
-    <!-- Ground Truth Badge -->
-    <div class="video-overlay">
-      <span id="gt-badge" class="gt-badge hidden">
-        GT: ANOMALOUS
-      </span>
-    </div>
-
-    <!-- Police Alert Banner -->
-    <div id="police-alert" class="police-alert hidden">
-      <span class="alert-icon">🚨</span>
-      ALERT SENT TO NEAREST POLICE STATION
-      <span class="alert-icon">🚨</span>
-    </div>
-
-  </div> <!-- END video-wrapper -->
-
-
-  <!-- Video Selector -->
-  <div class="video-selector">
-
-    <label for="video-select">Switch Video</label>
-
-    <select id="video-select">
-      {% for v in videos %}
-      <option value="{{ v }}">{{ v }}</option>
-      {% endfor %}
-    </select>
-
-    <button id="switch-btn">
-      Load
-    </button>
-
-  </div>
-
-</section>
-  <!-- Column 2 : Threat Info -->
-  <section class="panel threat-panel">
-
-    <!-- Threat Score -->
-    <div class="sub-panel score-panel">
-      <div class="panel-title">THREAT SCORE</div>
-      <div class="score-ring-wrapper">
-        <svg viewBox="0 0 120 120" class="score-ring">
-          <circle cx="60" cy="60" r="50" class="ring-bg"/>
-          <circle cx="60" cy="60" r="50" class="ring-fill" id="ring-fill"/>
-        </svg>
-        <div class="score-value-overlay">
-          <span id="score-value">0</span>
-          <span class="score-max">/100</span>
-        </div>
+  <!-- Column 1 : CCTV Feed Panel -->
+  <section class="panel video-panel">
+    <div class="panel-header">
+      <div class="panel-title-group">
+        <span class="panel-icon">📹</span>
+        <span class="panel-title">CCTV OPTICAL FEED</span>
+      </div>
+      <div class="panel-meta">
+        <span class="meta-tag" id="cam-active-id">CAM-01 // VESTIBULE 4</span>
+        <span class="meta-tag fps">60 FPS</span>
       </div>
     </div>
 
-    <!-- Risk Level -->
-    <div class="sub-panel risk-panel">
-      <div class="panel-title">RISK LEVEL</div>
-      <div id="risk-badge" class="risk-badge">NORMAL</div>
+    <!-- Surveillance Video Container -->
+    <div class="video-wrapper" id="video-wrapper">
+      <!-- HUD Reticle Corner Markings -->
+      <div class="hud-bracket top-left"></div>
+      <div class="hud-bracket top-right"></div>
+      <div class="hud-bracket bottom-left"></div>
+      <div class="hud-bracket bottom-right"></div>
+
+      <!-- HUD Top Info Line -->
+      <div class="hud-top-bar">
+        <span class="hud-rec"><span class="rec-dot"></span>REC</span>
+        <span class="hud-cam-name" id="hud-cam-title">28.mp4 [EVALUATION FEED]</span>
+        <span class="hud-timestamp" id="hud-time">1080P // 60HZ</span>
+      </div>
+
+      <!-- Local MJPEG stream fallback -->
+      <img id="video-stream" src="/video_feed" alt="Live Feed" style="display:none;"/>
+      <!-- HTML5 Video Player + Real-time Canvas for Cloud/Vercel -->
+      <video id="video-player" playsinline autoplay muted loop preload="auto" style="display:none;"></video>
+      <canvas id="cctv-canvas" style="display:none;"></canvas>
+
+      <!-- HUD Bottom Overlays -->
+      <div class="video-overlay-bottom">
+        <span id="gt-badge" class="gt-badge hidden">
+          🚨 GT: ANOMALOUS INCIDENT
+        </span>
+        <span id="gt-secure-badge" class="gt-badge secure">
+          🛡️ GT: NORMAL BEHAVIOR
+        </span>
+        <span class="hud-ai-tag">YOLOv8n + BYTETRACK ACTIVE</span>
+      </div>
     </div>
 
-    <!-- Reasons -->
+    <!-- Video Playback Controller Bar -->
+    <div class="playback-bar">
+      <div class="playback-controls">
+        <button id="btn-play-pause" class="btn-ctrl">⏸ Pause</button>
+        <button id="btn-restart" class="btn-ctrl">↺ Replay</button>
+      </div>
+      <div class="playback-scrubber-group">
+        <span id="playback-time" class="mono-time">00:00 / 00:00</span>
+        <div class="time-progress-bar">
+          <div class="time-progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Column 2 : Threat Intelligence & Metrics Panel -->
+  <section class="panel threat-panel">
+    
+    <div class="panel-header">
+      <div class="panel-title-group">
+        <span class="panel-icon">⚡</span>
+        <span class="panel-title">THREAT INTELLIGENCE</span>
+      </div>
+      <span class="meta-tag status" id="eval-status">EVALUATING</span>
+    </div>
+
+    <!-- Radial Threat Gauge -->
+    <div class="sub-panel score-panel">
+      <div class="sub-panel-title">DYNAMIC THREAT SCORE</div>
+      <div class="score-ring-wrapper">
+        <svg viewBox="0 0 140 140" class="score-ring">
+          <circle cx="70" cy="70" r="56" class="ring-bg"/>
+          <circle cx="70" cy="70" r="56" class="ring-fill" id="ring-fill"/>
+        </svg>
+        <div class="score-value-overlay">
+          <span id="score-value">0</span>
+          <span class="score-max">/100 RISK</span>
+        </div>
+      </div>
+      <div class="score-bar-labels">
+        <span>0 SAFE</span>
+        <span>50 ELEVATED</span>
+        <span>100 CRITICAL</span>
+      </div>
+    </div>
+
+    <!-- Threat Risk Level Card -->
+    <div class="sub-panel risk-panel">
+      <div class="sub-panel-title">RISK CLASSIFICATION</div>
+      <div id="risk-badge" class="risk-badge NORMAL">NORMAL</div>
+    </div>
+
+    <!-- Active Threat Violations -->
     <div class="sub-panel reasons-panel">
-      <div class="panel-title">ACTIVE THREATS</div>
+      <div class="sub-panel-title">ACTIVE DETECTIONS & BREACHES</div>
       <ul id="reasons-list" class="reasons-list">
-        <li class="no-threat">No threats detected</li>
+        <li class="no-threat">🛡️ All perimeters secure. No threats detected.</li>
       </ul>
     </div>
 
-    <!-- Stats -->
+    <!-- Live Telemetry Stats -->
     <div class="sub-panel stats-panel">
-      <div class="panel-title">DETECTION STATS</div>
+      <div class="sub-panel-title">TELEMETRY & SENSORS</div>
       <div class="stats-grid">
-        <div class="stat"><span id="stat-persons">0</span><label>Persons</label></div>
-        <div class="stat"><span id="stat-bags">0</span><label>Bags</label></div>
-        <div class="stat"><span id="stat-frame">0</span><label>Frame</label></div>
-        <div class="stat"><span id="stat-gt">—</span><label>Ground Truth</label></div>
+        <div class="stat-card">
+          <div class="stat-icon">👤</div>
+          <div class="stat-data">
+            <span id="stat-persons" class="stat-num">0</span>
+            <label>Persons Inside</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎒</div>
+          <div class="stat-data">
+            <span id="stat-bags" class="stat-num">0</span>
+            <label>Baggage Items</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎞️</div>
+          <div class="stat-data">
+            <span id="stat-frame" class="stat-num">0</span>
+            <label>Video Frame</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-data">
+            <span id="stat-gt" class="stat-num safe">NORMAL</span>
+            <label>Ground Truth</label>
+          </div>
+        </div>
       </div>
     </div>
 
   </section>
 
-  <!-- Column 3 : Event Log -->
+  <!-- Column 3 : Real-time Security Event Audit Trail -->
   <section class="panel log-panel">
-    <div class="panel-title">EVENT LOG</div>
+    <div class="panel-header">
+      <div class="panel-title-group">
+        <span class="panel-icon">📜</span>
+        <span class="panel-title">SECURITY EVENT AUDIT LOG</span>
+      </div>
+      <span class="meta-tag count" id="log-count">0 EVENTS</span>
+    </div>
+
+    <div class="log-controls">
+      <button class="log-filter-btn active" data-filter="all">All</button>
+      <button class="log-filter-btn" data-filter="alert">Alerts</button>
+      <button class="log-filter-btn" data-filter="system">System</button>
+      <button class="log-clear-btn" id="btn-clear-log" title="Clear Event Log">Clear</button>
+    </div>
+
     <ul id="event-log" class="event-log">
-      <li class="log-empty">Monitoring started…</li>
+      <li class="log-item system">
+        <span class="log-time">INITIALIZING</span>
+        <span class="log-badge system">SYSTEM</span>
+        <span class="log-msg">AI Surveillance Sentinel initialized. Monitoring feed...</span>
+      </li>
     </ul>
   </section>
 
