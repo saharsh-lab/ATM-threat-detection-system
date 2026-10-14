@@ -1,0 +1,13 @@
+# SentinelX model registry.
+#
+# Each entry is a versioned, reproducible model. `schema` is either `coco`
+# (COCO-80 ids, mapped through YOLO_CLASSES / data/registry/classes.yaml) or a
+# SentinelX class-schema version. Evaluation numbers live in the referenced
+# report — they are produced by ml/evaluate_detector.py, never typed by hand.
+models:
+  - id: yolov8n-coco
+    name: YOLOv8n (COCO-80, Ultralytics pretrained) — original baseline
+    weights: yolov8n.pt
+    sha256: f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36
+    schema: coco
+    source: https://github.com/ultralytics/assets/releases (yolov8n.pt, AGPL-3.0)
