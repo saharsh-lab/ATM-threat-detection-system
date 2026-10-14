@@ -1,0 +1,23 @@
+# SentinelX detector v1 — fine-tune of YOLOv8n (COCO-pretrained) on the
+# Open Images V7 SentinelX subset. Consumed by ml/train.py.
+run_id: sentinelx-det-v1
+base_weights: yolov8n.pt
+dataset: openimages_v7_sentinelx_v1
+data_yaml: datasets/processed/openimages_v7_sentinelx_v1/data.yaml
+
+train:
+  epochs: 40
+  imgsz: 640
+  batch: 32
+  patience: 10          # early stopping on val fitness
+  optimizer: AdamW
+  lr0: 0.002
+  cos_lr: true
+  warmup_epochs: 2
+  close_mosaic: 5
+  seed: 0
+  deterministic: true
+  workers: 8
+  cache: false
+  amp: true
+  plots: true
