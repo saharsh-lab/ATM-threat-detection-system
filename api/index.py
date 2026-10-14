@@ -3,7 +3,7 @@
 #
 # Serverless functions cannot run YOLO inference or keep camera streams open,
 # so this deployment serves the same dashboard with precomputed detections
-# (static/data/threat_timelines.json, produced by export_timeline.py with the
+# (static/data/threat_timelines.json, produced by ml/export_timeline.py with the
 # real pipeline) and committed evaluation reports (static/data/platform.json).
 # Everything is labelled "Demo · precomputed" in the UI. No database, no
 # evidence, no incident writes. Dependencies: Flask only.

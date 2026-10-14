@@ -1,10 +1,10 @@
-# export_timeline.py
+# ml/export_timeline.py
 # Precomputes REAL detections, tracking and threat scores (SentinelX v2
 # pipeline) for the serverless demo, which cannot run inference itself.
 # Every file records which model / engine produced it; the dashboard labels
 # this data as "Demo · precomputed" and never as live.
 #
-#   python export_timeline.py [--model sentinelx-det-v1] [--device cpu]
+#   python -m ml.export_timeline [--model sentinelx-det-v1] [--device cpu]
 
 import argparse
 import json
@@ -15,6 +15,7 @@ import cv2
 
 import config
 from core.detector import Detector
+from core.temporal import MotionMeter, TemporalFeatures, TemporalHead
 from core.threat_engine import ENGINE_VERSION, ThreatEngine
 from core.tracker import PersonTracker
 from data.annotations import is_anomalous_frame
@@ -24,7 +25,7 @@ OUTPUT_FILE = os.path.join(config.BASE_DIR, "static", "data", "threat_timelines.
 THREAT_CLASSES = {"knife", "scissors", "firearm", "blunt_tool"}
 
 
-def process_video(video_name, detector, infer_fps):
+def process_video(video_name, detector, infer_fps, head=None):
     video_path = os.path.join(config.BASE_DIR, "static", "videos", video_name)
     if not os.path.exists(video_path):
         print(f"Video {video_path} not found!")
@@ -35,6 +36,7 @@ def process_video(video_name, detector, infer_fps):
     w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     tracker, engine = PersonTracker(), ThreatEngine()
+    meter, temporal = MotionMeter(), TemporalFeatures()      # same pipeline as the live camera worker
     detector.reset_tracking()
 
     frames_data, frame_idx, last_t = [], 0, -1e9
@@ -50,7 +52,11 @@ def process_video(video_name, detector, infer_fps):
         dets = detector.detect(frame)
         persons = [d for d in dets if d["class_name"] == "person"]
         tracked = tracker.update(persons, w, h, now=t)
-        threat = engine.evaluate(tracked, dets, w, h, now=t)
+        cues = meter.update(frame, t)
+        anomaly = None
+        if head is not None:
+            anomaly = (head.predict(temporal.update(t, tracked, dets, cues)), head.threshold)
+        threat = engine.evaluate(tracked, dets, w, h, now=t, cues=cues, anomaly=anomaly)
         boxes = [{"bbox": list(p["bbox"]), "cls": "person", "conf": round(p["confidence"], 3), "tid": p["track_id"],
                   "dwell": p["dwell_sec"], "flag": bool(p["loitering"] or p["vandalism"] or p["rapid_motion"])}
                  for p in tracked]
@@ -75,12 +81,14 @@ def main():
     p.add_argument("--infer-fps", type=float, default=config.INFER_FPS)
     args = p.parse_args()
     detector = Detector(args.model, tracking=True, device=args.device)
+    head = TemporalHead.for_model(detector.version) if config.TEMPORAL_HEAD_ENABLED else None
     meta = {"model": detector.version, "engine": ENGINE_VERSION, "infer_fps": args.infer_fps,
+            "temporal_head": head.version if head else None,
             "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source": "ATMA-V research videos (CC BY-SA 4.0) — precomputed, not live"}
     timelines = {}
     for v in VIDEOS:
-        data = process_video(v, detector, args.infer_fps)
+        data = process_video(v, detector, args.infer_fps, head)
         if data:
             data["meta"] = meta
             timelines[v] = data

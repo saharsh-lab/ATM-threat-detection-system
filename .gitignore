@@ -12,7 +12,6 @@ env/
 
 # Nested / unrelated directories
 ATM-Threat-Detection-System/
-content-recommendation-engine/
 
 # Environment variables / secrets (template is committed)
 .env

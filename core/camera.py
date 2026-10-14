@@ -28,7 +28,7 @@ from core.threat_engine import ENGINE_VERSION, ThreatEngine
 from core.tracker import PersonTracker
 from core.zones import ZoneConfig
 from data.annotations import is_anomalous_frame
-from utils.helpers import (draw_hud, draw_objects, draw_tracker_info, draw_zones,
+from core.drawing import (draw_hud, draw_objects, draw_tracker_info, draw_zones,
                            encode_frame_to_jpeg, get_risk_color_hex)
 
 log = logging.getLogger("sentinelx.camera")

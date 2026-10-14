@@ -1,5 +1,5 @@
-# utils/helpers.py
-# Shared utility functions used across modules.
+# core/drawing.py
+# Drawing helpers for annotated camera frames (boxes, zones, HUD).
 
 import cv2
 import numpy as np
