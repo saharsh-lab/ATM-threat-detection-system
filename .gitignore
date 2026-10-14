@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
 # Virtual environments
 venv/
@@ -13,22 +14,34 @@ env/
 ATM-Threat-Detection-System/
 content-recommendation-engine/
 
-# Environment variables / secrets
+# Environment variables / secrets (template is committed)
 .env
 .env.*
+!.env.example
 
-# Databases
+# Runtime state — databases, surveillance evidence, uploads, backups, logs.
+# Never commit live surveillance records or footage.
+/instance/
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
 
-# YOLO training outputs
-runs/
-weights/
+# Local camera configuration (may reference credentials via env var names)
+config/cameras.yaml
 
-# Datasets
-datasets/
-dataset/
+# Datasets: raw downloads, processed images, inference caches.
+# Manifests, class maps and licences live in data/ and ARE committed.
+/datasets/
+/dataset/
+
+# Training outputs and checkpoints (released weights are whitelisted)
+/runs/
+/weights/
+*.pt
+!yolov8n.pt
+!models/sentinelx-det-*.pt
 
 # Logs & temp
 *.log
