@@ -1,0 +1,60 @@
+{
+  "run_id": "sentinelx-det-v1",
+  "finished_utc": "2026-10-14T10:03:00+00:00",
+  "git_commit": "f5b93ae03dc9a88eb312bf21b2079e89ec80e04f",
+  "config": {
+    "run_id": "sentinelx-det-v1",
+    "base_weights": "yolov8n.pt",
+    "dataset": "openimages_v7_sentinelx_v1",
+    "data_yaml": "datasets/processed/openimages_v7_sentinelx_v1/data.yaml",
+    "train": {
+      "epochs": 40,
+      "imgsz": 640,
+      "batch": 32,
+      "patience": 10,
+      "optimizer": "AdamW",
+      "lr0": 0.002,
+      "cos_lr": true,
+      "warmup_epochs": 2,
+      "close_mosaic": 5,
+      "seed": 0,
+      "deterministic": true,
+      "workers": 8,
+      "cache": false,
+      "amp": true,
+      "plots": true
+    }
+  },
+  "effective_train_args": {
+    "epochs": 40,
+    "imgsz": 640,
+    "batch": 32,
+    "patience": 10,
+    "optimizer": "AdamW",
+    "lr0": 0.002,
+    "cos_lr": true,
+    "warmup_epochs": 2,
+    "close_mosaic": 5,
+    "seed": 0,
+    "deterministic": true,
+    "workers": 8,
+    "cache": false,
+    "amp": true,
+    "plots": true,
+    "device": "mps"
+  },
+  "dataset": {
+    "id": "openimages_v7_sentinelx_v1",
+    "version": "6495ad20fbf022c7",
+    "splits": {
+      "train": 6178,
+      "val": 906,
+      "test": 1437
+    }
+  },
+  "base_weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+  "weights": "models/sentinelx-det-v1.pt",
+  "weights_sha256": "f256db90266b2a04a80cf5f6bbeac2a9c4e7876b93b19939a196b4a9590f571d",
+  "weights_bytes": 6226474,
+  "wall_time_seconds": 16067
+}

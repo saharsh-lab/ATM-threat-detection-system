@@ -77,6 +77,12 @@ def main(argv=None):
         src = os.path.join(run_dir, name)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(report_dir, name))
+    args_copy = os.path.join(report_dir, "args.yaml")
+    if os.path.exists(args_copy):                  # committed copy: no absolute local paths
+        with open(args_copy) as f:
+            text = f.read().replace(REPO_ROOT + os.sep, "./").replace(REPO_ROOT, ".")
+        with open(args_copy, "w") as f:
+            f.write(text)
     meta = {
         "run_id": run_id,
         "finished_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),

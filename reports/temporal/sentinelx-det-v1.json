@@ -1,0 +1,232 @@
+{
+  "generated_utc": "2026-10-14T10:13:51+00:00",
+  "detector": "sentinelx-det-v1",
+  "dataset": "ATMA-V (data/manifests/atmav/manifest.json)",
+  "train": {
+    "videos": 32,
+    "frames": 8336,
+    "anomalous_frames": 3576
+  },
+  "val": {
+    "videos": 12,
+    "frames": 5191,
+    "anomalous_frames": 3185
+  },
+  "selection": [
+    {
+      "features": "all",
+      "C": 0.003,
+      "train_auc": 0.8184,
+      "val_auc": 0.7036
+    },
+    {
+      "features": "all",
+      "C": 0.01,
+      "train_auc": 0.8358,
+      "val_auc": 0.7036
+    },
+    {
+      "features": "all",
+      "C": 0.03,
+      "train_auc": 0.8464,
+      "val_auc": 0.7101
+    },
+    {
+      "features": "all",
+      "C": 0.1,
+      "train_auc": 0.8566,
+      "val_auc": 0.7202
+    },
+    {
+      "features": "all",
+      "C": 0.3,
+      "train_auc": 0.8671,
+      "val_auc": 0.7296
+    },
+    {
+      "features": "all",
+      "C": 1.0,
+      "train_auc": 0.877,
+      "val_auc": 0.7378
+    },
+    {
+      "features": "all",
+      "C": 3.0,
+      "train_auc": 0.8821,
+      "val_auc": 0.741
+    },
+    {
+      "features": "all",
+      "C": 10.0,
+      "train_auc": 0.8842,
+      "val_auc": 0.7404
+    },
+    {
+      "features": "image_cues",
+      "C": 0.003,
+      "train_auc": 0.7681,
+      "val_auc": 0.7715
+    },
+    {
+      "features": "image_cues",
+      "C": 0.01,
+      "train_auc": 0.7775,
+      "val_auc": 0.7891
+    },
+    {
+      "features": "image_cues",
+      "C": 0.03,
+      "train_auc": 0.7869,
+      "val_auc": 0.7993
+    },
+    {
+      "features": "image_cues",
+      "C": 0.1,
+      "train_auc": 0.8031,
+      "val_auc": 0.8099
+    },
+    {
+      "features": "image_cues",
+      "C": 0.3,
+      "train_auc": 0.8201,
+      "val_auc": 0.8193
+    },
+    {
+      "features": "image_cues",
+      "C": 1.0,
+      "train_auc": 0.8316,
+      "val_auc": 0.8211
+    },
+    {
+      "features": "image_cues",
+      "C": 3.0,
+      "train_auc": 0.8353,
+      "val_auc": 0.8179
+    },
+    {
+      "features": "image_cues",
+      "C": 10.0,
+      "train_auc": 0.8367,
+      "val_auc": 0.8154
+    },
+    {
+      "features": "behaviour",
+      "C": 0.003,
+      "train_auc": 0.7608,
+      "val_auc": 0.7407
+    },
+    {
+      "features": "behaviour",
+      "C": 0.01,
+      "train_auc": 0.7775,
+      "val_auc": 0.7384
+    },
+    {
+      "features": "behaviour",
+      "C": 0.03,
+      "train_auc": 0.7847,
+      "val_auc": 0.7368
+    },
+    {
+      "features": "behaviour",
+      "C": 0.1,
+      "train_auc": 0.7899,
+      "val_auc": 0.7357
+    },
+    {
+      "features": "behaviour",
+      "C": 0.3,
+      "train_auc": 0.792,
+      "val_auc": 0.7348
+    },
+    {
+      "features": "behaviour",
+      "C": 1.0,
+      "train_auc": 0.7937,
+      "val_auc": 0.7346
+    },
+    {
+      "features": "behaviour",
+      "C": 3.0,
+      "train_auc": 0.7948,
+      "val_auc": 0.7349
+    },
+    {
+      "features": "behaviour",
+      "C": 10.0,
+      "train_auc": 0.7958,
+      "val_auc": 0.7354
+    }
+  ],
+  "chosen": {
+    "features": "image_cues",
+    "C": 1.0,
+    "val_auc": 0.8211,
+    "threshold": 0.36,
+    "val_youden_j": 0.505,
+    "threshold_rule": "max Youden J (TPR - FPR) on val"
+  },
+  "top_coefficients": [
+    {
+      "feature": "mean_motion",
+      "coef": -11.5114
+    },
+    {
+      "feature": "mean_motion_zone",
+      "coef": 10.3743
+    },
+    {
+      "feature": "max_motion_zone",
+      "coef": 3.8697
+    },
+    {
+      "feature": "max_motion",
+      "coef": -3.4812
+    },
+    {
+      "feature": "mean_sharpness",
+      "coef": -1.9316
+    },
+    {
+      "feature": "max_sharpness",
+      "coef": 1.7822
+    },
+    {
+      "feature": "max_no_person_motion",
+      "coef": 1.4875
+    },
+    {
+      "feature": "mean_no_person_motion",
+      "coef": 1.3179
+    },
+    {
+      "feature": "mean_sharpness_drop",
+      "coef": -1.0871
+    },
+    {
+      "feature": "max_brightness_drop",
+      "coef": -0.7146
+    },
+    {
+      "feature": "max_sharpness_drop",
+      "coef": 0.5624
+    },
+    {
+      "feature": "mean_brightness_drop",
+      "coef": 0.4653
+    },
+    {
+      "feature": "mean_brightness",
+      "coef": -0.3229
+    },
+    {
+      "feature": "max_brightness",
+      "coef": -0.1091
+    },
+    {
+      "feature": "mean_persons_zone",
+      "coef": 0.0
+    }
+  ],
+  "note": "test split not used; see reports/pipeline for held-out results"
+}
