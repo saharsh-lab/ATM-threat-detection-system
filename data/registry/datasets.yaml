@@ -1,0 +1,141 @@
+# SentinelX dataset registry.
+#
+# Every dataset that was investigated is listed — including those NOT acquired —
+# with the access/licence facts that were verified on the official source on
+# 2026-10-14. `status`:
+#   acquired      downloaded, validated, manifest committed under data/manifests/
+#   documented    investigated, not acquired (reason in `blocker`)
+#
+# `label_type` keeps object-detection labels (bbox) strictly separate from
+# video-level / temporal anomaly labels. Only bbox datasets are used for
+# detector training; video datasets are used for pipeline evaluation.
+# Human-readable version: docs/DATASETS.md
+
+datasets:
+  - id: openimages_v7_sentinelx_v1
+    name: Open Images V7 — SentinelX subset
+    status: acquired
+    label_type: bbox
+    used_for: detector training / validation / test
+    source_url: https://storage.googleapis.com/openimages/web/index.html
+    license: "Annotations CC BY 4.0 (Google LLC); images listed as CC BY 2.0 (per-image author recorded)"
+    access: public (official GCS annotation files, CVDF S3 image mirror)
+    redistribution: "Annotations (derived YOLO labels) committed with attribution; images NOT committed (size) — re-downloaded by script"
+    manifest_path: data/manifests/openimages_v7_sentinelx_v1/
+    acquire: python -m ml.datasets.openimages reproduce
+
+  - id: atmav
+    name: ATM Anomaly Video Dataset (ATMA-V)
+    status: acquired
+    label_type: video_temporal
+    used_for: end-to-end threat pipeline calibration (train/val) and evaluation (test)
+    source_url: https://www.kaggle.com/datasets/mehantkammakomati/atm-anomaly-video-dataset-atmav
+    license: "CC BY-SA 4.0 (as declared on Kaggle by the uploader)"
+    access: public (Kaggle account for download)
+    redistribution: >-
+      The 65 videos were already committed to this repository before SentinelX
+      (data/videos/). CC BY-SA 4.0 permits redistribution with attribution and
+      share-alike; attribution is in data/videos/ATTRIBUTION.md. Caveat: the
+      uploader states the clips were collected from YouTube, stock-footage and
+      news sites, so upstream rights are not guaranteed by the Kaggle licence.
+    manifest_path: data/manifests/atmav/manifest.json
+    acquire: python -m ml.datasets.atmav --download   # needs ~/.kaggle/kaggle.json
+    notes: 14 videos' containers over-report frame counts by 1–131 frames; all labelled segments lie within decodable frames (see manifest validation_notes).
+
+  - id: scfd
+    name: Surveillance Camera Fight Dataset
+    status: acquired
+    label_type: video_level
+    used_for: evaluation of fighting / struggle rules (val = tuning, test = report)
+    source_url: https://github.com/seymanurakti/fight-detection-surv-dataset
+    license: MIT (repository LICENSE)
+    access: public
+    redistribution: "Not committed — clips were cut from YouTube videos; fetched on demand by script"
+    manifest_path: data/manifests/scfd/manifest.json
+    acquire: python -m ml.datasets.scfd
+
+  - id: ucf_crime
+    name: UCF-Crime (Real-world Anomaly Detection in Surveillance Videos)
+    status: documented
+    label_type: video_level   # temporal annotations for test videos only
+    source_url: https://www.crcv.ucf.edu/projects/real-world/
+    license: "Official page: 'All data is only for research purposes, unless stated differently. Please make sure to reference the authors properly.'"
+    access: public download (UCF zip / Dropbox parts), ~128 h, 1,900 videos, 13 anomaly classes incl. Robbery, Burglary, Fighting, Vandalism
+    blocker: >-
+      Archive is on the order of 100 GB; this machine had 48 GB free disk.
+      Labels are video-level (temporal only for test), so it would serve the
+      pipeline evaluation, not detector training. Research-only terms.
+    reproducible_alternative: "python -m ml.datasets.ucf_crime --accept-research-terms --classes Robbery Fighting Vandalism (downloads only the temporal annotation file unless --videos is given)"
+
+  - id: xd_violence
+    name: XD-Violence
+    status: documented
+    label_type: video_level
+    source_url: https://roc-ng.github.io/XD-Violence/
+    license: "No licence or usage terms stated on the official page"
+    access: Baidu Netdisk / AliyunDrive / OneDrive links (Baidu training link marked disabled)
+    blocker: "No stated licence; 217 h (4,754 videos); includes movie/game footage, weak labels."
+
+  - id: rwf2000
+    name: RWF-2000 (violence detection)
+    status: documented
+    label_type: video_level
+    source_url: https://github.com/mchengny/RWF2000-Video-Database-for-Violence-Detection
+    license: "No modification/redistribution or commercial use without SMIIP Lab approval"
+    access: "Official page: video files currently not available for privacy reasons"
+    blocker: Videos not publicly available; requires lab approval.
+
+  - id: cuhk_avenue
+    name: CUHK Avenue
+    status: documented
+    label_type: video_temporal   # abnormal events marked with rectangles in test
+    source_url: https://www.cse.cuhk.edu.hk/leojia/projects/detectabnormal/dataset.html
+    license: "No licence stated on the official page; citation requested (Lu, Shi, Jia, ICCV 2013)"
+    access: public zip
+    blocker: "No licence stated; campus walkway (running, throwing objects) — weak relevance to ATM vestibules."
+
+  - id: shanghaitech_campus
+    name: ShanghaiTech Campus
+    status: documented
+    label_type: video_temporal
+    source_url: https://svip-lab.github.io/dataset/campus_dataset.html
+    license: "Not verified on the official page (third-party docs claim BSD-2-Clause)"
+    access: public (manual download)
+    blocker: "Licence not verifiable from the official source; campus scenes (437 videos), not ATM."
+
+  - id: ucsd_ped
+    name: UCSD Anomaly Detection (Ped1/Ped2)
+    status: documented
+    label_type: video_temporal
+    source_url: http://www.svcl.ucsd.edu/projects/anomaly/dataset.htm
+    license: unknown
+    blocker: "Official site unreachable during research (connection refused); pedestrian walkways only."
+
+  - id: ubnormal
+    name: UBnormal
+    status: documented
+    label_type: video_temporal   # pixel-level in training
+    source_url: https://github.com/lilygeorgescu/UBnormal
+    license: CC BY-NC-ND 4.0
+    blocker: "Synthetic (virtual scenes); NoDerivatives licence forbids distributing derived labels."
+
+  - id: virat
+    name: VIRAT Video Dataset (ground camera)
+    status: documented
+    label_type: video_temporal   # activity tracks, 46 DIVA activity types
+    source_url: https://viratdata.org/
+    license: "Ground-camera data under the 'VIRAT Video Dataset Protection Agreement'"
+    blocker: "Requires signing the protection agreement; outdoor parking-lot scenes."
+
+  - id: od_weapon_detection
+    name: OD-WeaponDetection (University of Granada, DaSCI)
+    status: documented
+    label_type: bbox
+    source_url: https://github.com/ari-dasci/OD-WeaponDetection
+    license: "README states CC BY-SA 4.0; repository sidebar says CC BY 4.0 (inconsistent)"
+    access: Google Drive archive
+    blocker: >-
+      Licence statement is internally inconsistent and the archive is on Google
+      Drive (no scripted, verifiable download). Candidate for v2 once the
+      licence is confirmed with the authors; Open Images already provides
+      Knife/Handgun/Rifle/Shotgun boxes under a clear licence.

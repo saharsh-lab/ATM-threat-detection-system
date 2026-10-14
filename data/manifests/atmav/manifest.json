@@ -1,0 +1,1313 @@
+{
+  "dataset": "ATMA-V",
+  "source": "https://www.kaggle.com/datasets/mehantkammakomati/atm-anomaly-video-dataset-atmav",
+  "license_declared": "CC BY-SA 4.0",
+  "label_type": "video-level temporal frame ranges (1-indexed, inclusive)",
+  "split_policy": "group-aware by source recording id, stratified by anomalous/normal group",
+  "split_seed": 7,
+  "split_counts": {
+    "train": 32,
+    "val": 12,
+    "test": 21
+  },
+  "validation_errors": [],
+  "validation_notes": [
+    "30a.mp4: container reports 229 frames, 228 decodable",
+    "30b.mp4: container reports 191 frames, 178 decodable",
+    "32.mp4: container reports 1137 frames, 1096 decodable",
+    "36a.mp4: container reports 454 frames, 319 decodable",
+    "36b.mp4: container reports 1899 frames, 1884 decodable",
+    "36c.mp4: container reports 545 frames, 544 decodable",
+    "47.mp4: container reports 151 frames, 146 decodable",
+    "67b.mp4: container reports 237 frames, 235 decodable",
+    "68.mp4: container reports 850 frames, 719 decodable",
+    "75.mp4: container reports 712 frames, 687 decodable",
+    "76.mp4: container reports 816 frames, 812 decodable",
+    "82a.mp4: container reports 390 frames, 389 decodable",
+    "82b.mp4: container reports 77 frames, 76 decodable",
+    "87.mp4: container reports 3158 frames, 3143 decodable"
+  ],
+  "videos": [
+    {
+      "video": "3.mp4",
+      "group": "3",
+      "split": "test",
+      "label_total_frames": 737,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          737
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "47621023d79989e66181a2ac4200e58ce6e57640baf091975b733d2836cc54be",
+      "readable": true,
+      "fps": 30.0,
+      "width": 290,
+      "height": 284,
+      "frames_reported": 737,
+      "frames_decoded": 737
+    },
+    {
+      "video": "5.mp4",
+      "group": "5",
+      "split": "train",
+      "label_total_frames": 1862,
+      "label_fps": 25,
+      "segments": [
+        [
+          160,
+          1862
+        ]
+      ],
+      "anomaly_fraction": 0.9146,
+      "sha256": "d67450c55f7497a2d79b679aeae4c1a02c4570a0a4d001d1967da00fb443a9f3",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 1862,
+      "frames_decoded": 1862
+    },
+    {
+      "video": "10.mp4",
+      "group": "10",
+      "split": "test",
+      "label_total_frames": 1796,
+      "label_fps": 30,
+      "segments": [
+        [
+          349,
+          1796
+        ]
+      ],
+      "anomaly_fraction": 0.8062,
+      "sha256": "2b0e0255a64f76dcf2d492070ef7f6bd57266bafae54d520fe75e4166da67566",
+      "readable": true,
+      "fps": 30.0,
+      "width": 440,
+      "height": 360,
+      "frames_reported": 1796,
+      "frames_decoded": 1796
+    },
+    {
+      "video": "11.mp4",
+      "group": "11",
+      "split": "train",
+      "label_total_frames": 297,
+      "label_fps": 24,
+      "segments": [
+        [
+          210,
+          297
+        ]
+      ],
+      "anomaly_fraction": 0.2963,
+      "sha256": "7e0da475d67972ecd6ed31aaea3e95f3a9e9ea9e02818a0c4fefafa436d966b4",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 297,
+      "frames_decoded": 297
+    },
+    {
+      "video": "12.mp4",
+      "group": "12",
+      "split": "test",
+      "label_total_frames": 910,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "fd5b022c6411b7220133d4832c48c4cd05ab162309912485d25bc057149fd11c",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 910,
+      "frames_decoded": 910
+    },
+    {
+      "video": "13.mp4",
+      "group": "13",
+      "split": "train",
+      "label_total_frames": 876,
+      "label_fps": 24,
+      "segments": [
+        [
+          803,
+          876
+        ]
+      ],
+      "anomaly_fraction": 0.0845,
+      "sha256": "607f73d200f8576feb21cc3cbf0a9a3198b052cd684272429cdb0d23c98d3068",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 876,
+      "frames_decoded": 876
+    },
+    {
+      "video": "14.mp4",
+      "group": "14",
+      "split": "val",
+      "label_total_frames": 642,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "a67ad6e687efca9edc7e2913493d2f255429447992f0c40388a08a43089dfff7",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 642,
+      "frames_decoded": 642
+    },
+    {
+      "video": "15.mp4",
+      "group": "15",
+      "split": "test",
+      "label_total_frames": 446,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "719eae4d6ef6f07f445f16e0bc0c7f3b6918f046caf589dbca1a30996edb0363",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 446,
+      "frames_decoded": 446
+    },
+    {
+      "video": "16.mp4",
+      "group": "16",
+      "split": "train",
+      "label_total_frames": 907,
+      "label_fps": 24,
+      "segments": [
+        [
+          784,
+          862
+        ]
+      ],
+      "anomaly_fraction": 0.0871,
+      "sha256": "f90088310616bb0c910884f923dce1e5d211e57f2978f91ebf81a070cbdf26bf",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 907,
+      "frames_decoded": 907
+    },
+    {
+      "video": "17.mp4",
+      "group": "17",
+      "split": "train",
+      "label_total_frames": 924,
+      "label_fps": 24,
+      "segments": [
+        [
+          818,
+          924
+        ]
+      ],
+      "anomaly_fraction": 0.1158,
+      "sha256": "8f91b99a87c3aae99b80024ae2cc4e9894a04894bded4d12c38026eea08f3e1e",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 924,
+      "frames_decoded": 924
+    },
+    {
+      "video": "18.mp4",
+      "group": "18",
+      "split": "test",
+      "label_total_frames": 378,
+      "label_fps": 24,
+      "segments": [
+        [
+          258,
+          339
+        ]
+      ],
+      "anomaly_fraction": 0.2169,
+      "sha256": "06305a0831b1d3f27e38b2dc9d28eabe29155abadf514911c2b70f69ce9197f8",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 378,
+      "frames_decoded": 378
+    },
+    {
+      "video": "19.mp4",
+      "group": "19",
+      "split": "train",
+      "label_total_frames": 684,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "69a97abe9e989fa3cc5ff5080e9f97e7b176b5f6e124d4195f7a2093f78822a4",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 684,
+      "frames_decoded": 684
+    },
+    {
+      "video": "20.mp4",
+      "group": "20",
+      "split": "train",
+      "label_total_frames": 989,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "1f96b74147322e8370878a67fe15ec547593bc445050889d51538eb2b071aeb8",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 989,
+      "frames_decoded": 989
+    },
+    {
+      "video": "21.mp4",
+      "group": "21",
+      "split": "train",
+      "label_total_frames": 725,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "fd85a4b21b27d8f8204e531a78edfa8af84416180fe5e5de206b7ce49984c014",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 725,
+      "frames_decoded": 725
+    },
+    {
+      "video": "22.mp4",
+      "group": "22",
+      "split": "test",
+      "label_total_frames": 1030,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "7ad930638c47bb63887150f72d543e637184fddee386c80329b6f6c5190f5be2",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 1030,
+      "frames_decoded": 1030
+    },
+    {
+      "video": "23.mp4",
+      "group": "23",
+      "split": "test",
+      "label_total_frames": 578,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "ba1566430afc68ae8a63d28670ef6778a84e28ca391a6dfa43cf0dd10edd31d3",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 578,
+      "frames_decoded": 578
+    },
+    {
+      "video": "24.mp4",
+      "group": "24",
+      "split": "val",
+      "label_total_frames": 671,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "1d69404933c7090a80856ad346153d94bd4e6ecbc648b57e97fb801e7fe9b684",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 671,
+      "frames_decoded": 671
+    },
+    {
+      "video": "25.mp4",
+      "group": "25",
+      "split": "train",
+      "label_total_frames": 357,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "f2d3a3a1c9a8e4386817d7d58abe0d799ca1e4e77f85d8cda2386236e1c60204",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 357,
+      "frames_decoded": 357
+    },
+    {
+      "video": "27.mp4",
+      "group": "27",
+      "split": "train",
+      "label_total_frames": 588,
+      "label_fps": 24,
+      "segments": [
+        [
+          1,
+          404
+        ],
+        [
+          567,
+          588
+        ]
+      ],
+      "anomaly_fraction": 0.7245,
+      "sha256": "78e679a361d0ad702f932484d86927e2a713afc407742e89ee6839a9ec521a52",
+      "readable": true,
+      "fps": 24.0,
+      "width": 480,
+      "height": 346,
+      "frames_reported": 588,
+      "frames_decoded": 588
+    },
+    {
+      "video": "28.mp4",
+      "group": "28",
+      "split": "train",
+      "label_total_frames": 945,
+      "label_fps": 25,
+      "segments": [
+        [
+          92,
+          321
+        ],
+        [
+          807,
+          945
+        ]
+      ],
+      "anomaly_fraction": 0.3905,
+      "sha256": "989f1e47eb97791a1b5e5bd702ab9d716ea3dd5d9c4b57833ba70f32b7c644a2",
+      "readable": true,
+      "fps": 25.0,
+      "width": 626,
+      "height": 718,
+      "frames_reported": 945,
+      "frames_decoded": 945
+    },
+    {
+      "video": "30a.mp4",
+      "group": "30",
+      "split": "train",
+      "label_total_frames": 229,
+      "label_fps": 25,
+      "segments": [
+        [
+          20,
+          228
+        ]
+      ],
+      "anomaly_fraction": 0.9127,
+      "sha256": "eda7dd1e3bc9b2293dbfe1d0ff01f9a31688193aac0a696e22ccda4dd271aa5d",
+      "readable": true,
+      "fps": 24.894,
+      "width": 1280,
+      "height": 720,
+      "frames_reported": 229,
+      "frames_decoded": 228
+    },
+    {
+      "video": "30b.mp4",
+      "group": "30",
+      "split": "train",
+      "label_total_frames": 191,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          178
+        ]
+      ],
+      "anomaly_fraction": 0.9319,
+      "sha256": "089a8cbbb5f5df8fba40b97e20bd72b885101409afbc2352df8891e4c4a3c707",
+      "readable": true,
+      "fps": 24.98,
+      "width": 1280,
+      "height": 720,
+      "frames_reported": 191,
+      "frames_decoded": 178
+    },
+    {
+      "video": "31.mp4",
+      "group": "31",
+      "split": "val",
+      "label_total_frames": 3947,
+      "label_fps": 25,
+      "segments": [
+        [
+          512,
+          3525
+        ]
+      ],
+      "anomaly_fraction": 0.7636,
+      "sha256": "8a35619af894da7c8435e99c955ec40cb9a4d7f8fab683b5e02f6ce284f36995",
+      "readable": true,
+      "fps": 29.97,
+      "width": 408,
+      "height": 304,
+      "frames_reported": 3947,
+      "frames_decoded": 3947
+    },
+    {
+      "video": "32.mp4",
+      "group": "32",
+      "split": "train",
+      "label_total_frames": 1137,
+      "label_fps": 30,
+      "segments": [
+        [
+          520,
+          1020
+        ]
+      ],
+      "anomaly_fraction": 0.4406,
+      "sha256": "9de1bfeb17679e281228ae906bbdde22f9bad4af7d31533493776593995fd133",
+      "readable": true,
+      "fps": 29.919,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 1137,
+      "frames_decoded": 1096
+    },
+    {
+      "video": "36a.mp4",
+      "group": "36",
+      "split": "test",
+      "label_total_frames": 454,
+      "label_fps": 30,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "e5f04b306498a5da693faaa44d618b44802de9bc5bdb8719f3924c1c3abed4bf",
+      "readable": true,
+      "fps": 29.9,
+      "width": 640,
+      "height": 358,
+      "frames_reported": 454,
+      "frames_decoded": 319
+    },
+    {
+      "video": "36b.mp4",
+      "group": "36",
+      "split": "test",
+      "label_total_frames": 1899,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          1884
+        ]
+      ],
+      "anomaly_fraction": 0.9921,
+      "sha256": "2c29f7f05f1d8fd4a744c92968e3fd9ec02d39364c90d7183d033b15d0502e00",
+      "readable": true,
+      "fps": 30.0,
+      "width": 640,
+      "height": 358,
+      "frames_reported": 1899,
+      "frames_decoded": 1884
+    },
+    {
+      "video": "36c.mp4",
+      "group": "36",
+      "split": "test",
+      "label_total_frames": 545,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          544
+        ]
+      ],
+      "anomaly_fraction": 0.9982,
+      "sha256": "e80845853015b4ed7bb4599a8cf7b30fe8a50d314adcf1ec0c16f7b5ae818558",
+      "readable": true,
+      "fps": 29.9,
+      "width": 640,
+      "height": 358,
+      "frames_reported": 545,
+      "frames_decoded": 544
+    },
+    {
+      "video": "42.mp4",
+      "group": "42",
+      "split": "train",
+      "label_total_frames": 347,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "a04e3678dcbed996fe4c664b2c2af828dc3abf9cf0f7c4c45a88a04f0e621d21",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 347,
+      "frames_decoded": 347
+    },
+    {
+      "video": "47.mp4",
+      "group": "47",
+      "split": "test",
+      "label_total_frames": 151,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "96aa800e95eeb901da62ffa0d7b72aa7702ad568fdc8c81fff586de586d11385",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 151,
+      "frames_decoded": 146
+    },
+    {
+      "video": "50.mp4",
+      "group": "50",
+      "split": "test",
+      "label_total_frames": 318,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "cdbbe5239d7ce28ef02facfcfdc4b86c8b657cf7352c093c329c07fe28137c06",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 318,
+      "frames_decoded": 318
+    },
+    {
+      "video": "51.mp4",
+      "group": "51",
+      "split": "val",
+      "label_total_frames": 312,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "e477c744d642c4fa4004d40cf373846644bc0c1401e4c0a1779eca8a470329f5",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 312,
+      "frames_decoded": 312
+    },
+    {
+      "video": "52.mp4",
+      "group": "52",
+      "split": "train",
+      "label_total_frames": 330,
+      "label_fps": 30,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "e0af74587b5360ddc23306fad7497710e2dc8c3dd37cb80a519a632ee7ba257d",
+      "readable": true,
+      "fps": 29.97,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 330,
+      "frames_decoded": 330
+    },
+    {
+      "video": "53.mp4",
+      "group": "53",
+      "split": "test",
+      "label_total_frames": 322,
+      "label_fps": 24,
+      "segments": [
+        [
+          78,
+          126
+        ]
+      ],
+      "anomaly_fraction": 0.1522,
+      "sha256": "56c15e58b3b9a248a971049dfaaf55abd00caca24c8271717554b8e06fd82616",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 322,
+      "frames_decoded": 322
+    },
+    {
+      "video": "54.mp4",
+      "group": "54",
+      "split": "val",
+      "label_total_frames": 572,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "fe001b2c0f6207e18a2f2f7a7263a3acd673df54ad5a2724ae6f1d365201ac86",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 572,
+      "frames_decoded": 572
+    },
+    {
+      "video": "55.mp4",
+      "group": "55",
+      "split": "val",
+      "label_total_frames": 363,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "a43cf8f6f9a5999426e7253c6c231ef796529cb1aa0bae1ccbb09b682b455a4b",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 363,
+      "frames_decoded": 363
+    },
+    {
+      "video": "56.mp4",
+      "group": "56",
+      "split": "train",
+      "label_total_frames": 1012,
+      "label_fps": 60,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "bcee4580f5bfd0461d83ffd8ed0bfeaa396b8d2b117e6b67d0a8236330ebba1d",
+      "readable": true,
+      "fps": 60.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 1012,
+      "frames_decoded": 1012
+    },
+    {
+      "video": "57.mp4",
+      "group": "57",
+      "split": "val",
+      "label_total_frames": 255,
+      "label_fps": 30,
+      "segments": [
+        [
+          54,
+          255
+        ]
+      ],
+      "anomaly_fraction": 0.7922,
+      "sha256": "0e3b1df55c580901219a58d653fae26c8873e727a6e040b512e263b52693721d",
+      "readable": true,
+      "fps": 29.97,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 255,
+      "frames_decoded": 255
+    },
+    {
+      "video": "59.mp4",
+      "group": "59",
+      "split": "train",
+      "label_total_frames": 473,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "35a61fd68fa8bec387501763f5e0f708b087467052f66510064247a95245f329",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 473,
+      "frames_decoded": 473
+    },
+    {
+      "video": "60.mp4",
+      "group": "60",
+      "split": "train",
+      "label_total_frames": 822,
+      "label_fps": 50,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "7f9f3ca518aefad962ff67686a3310f406d42070153e0397c977c572276ce3ba",
+      "readable": true,
+      "fps": 50.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 822,
+      "frames_decoded": 822
+    },
+    {
+      "video": "62.mp4",
+      "group": "62",
+      "split": "train",
+      "label_total_frames": 712,
+      "label_fps": 24,
+      "segments": [
+        [
+          320,
+          530
+        ],
+        [
+          580,
+          712
+        ]
+      ],
+      "anomaly_fraction": 0.4831,
+      "sha256": "6e8cf12f1820d8b5c0a0d1b6df5d660855160527fc5ba518b36e064b6c7e9a6d",
+      "readable": true,
+      "fps": 24.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 712,
+      "frames_decoded": 712
+    },
+    {
+      "video": "63.mp4",
+      "group": "63",
+      "split": "train",
+      "label_total_frames": 432,
+      "label_fps": 25,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "aaf850d887aef9a5604962307bba4de2be9066e26761e1df0db39ea237a364d8",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 432,
+      "frames_decoded": 432
+    },
+    {
+      "video": "65.mp4",
+      "group": "65",
+      "split": "train",
+      "label_total_frames": 742,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "0edfa8f76214e9811a8d20e5a0f1b0c380060ed1d3299666131809d7a6014bd8",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 742,
+      "frames_decoded": 742
+    },
+    {
+      "video": "66.mp4",
+      "group": "66",
+      "split": "test",
+      "label_total_frames": 628,
+      "label_fps": 24,
+      "segments": [],
+      "anomaly_fraction": 0.0,
+      "sha256": "73837b642b906e64f3d6deef91384bdd35ed37f89ac684b340285d9af44ddf9b",
+      "readable": true,
+      "fps": 23.976,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 628,
+      "frames_decoded": 628
+    },
+    {
+      "video": "67a.mp4",
+      "group": "67",
+      "split": "train",
+      "label_total_frames": 118,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          118
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "23c9d46e2a0131e0f105791b2410c04019b510a7524c714a9e9abf8d54ceb606",
+      "readable": true,
+      "fps": 24.583,
+      "width": 1160,
+      "height": 464,
+      "frames_reported": 118,
+      "frames_decoded": 118
+    },
+    {
+      "video": "67b.mp4",
+      "group": "67",
+      "split": "train",
+      "label_total_frames": 237,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          235
+        ]
+      ],
+      "anomaly_fraction": 0.9916,
+      "sha256": "c281f3d4321cc61ee247a33522c3bfff039a2f18ca4764fdd22d9e6443d16ad3",
+      "readable": true,
+      "fps": 24.791,
+      "width": 1160,
+      "height": 464,
+      "frames_reported": 237,
+      "frames_decoded": 235
+    },
+    {
+      "video": "68.mp4",
+      "group": "68",
+      "split": "train",
+      "label_total_frames": 850,
+      "label_fps": 25,
+      "segments": [
+        [
+          98,
+          360
+        ],
+        [
+          448,
+          677
+        ]
+      ],
+      "anomaly_fraction": 0.58,
+      "sha256": "4727ce6aed2407dd73206515cc9a5b2079330162b81ec47ea2c88761efff7a1a",
+      "readable": true,
+      "fps": 24.96,
+      "width": 1280,
+      "height": 720,
+      "frames_reported": 850,
+      "frames_decoded": 719
+    },
+    {
+      "video": "69.mp4",
+      "group": "69",
+      "split": "test",
+      "label_total_frames": 2147,
+      "label_fps": 30,
+      "segments": [
+        [
+          378,
+          2147
+        ]
+      ],
+      "anomaly_fraction": 0.8244,
+      "sha256": "112b548681ce48cf13a3089055bf80d7ab876092f160651dbf3a69fef2577abd",
+      "readable": true,
+      "fps": 29.97,
+      "width": 478,
+      "height": 316,
+      "frames_reported": 2147,
+      "frames_decoded": 2147
+    },
+    {
+      "video": "70.mp4",
+      "group": "70",
+      "split": "train",
+      "label_total_frames": 2905,
+      "label_fps": 30,
+      "segments": [
+        [
+          2369,
+          2866
+        ]
+      ],
+      "anomaly_fraction": 0.1714,
+      "sha256": "fe8bfafc934ccefda5b4bd4f97bb3af27e31e5d6f557695ff3189125d7bba193",
+      "readable": true,
+      "fps": 29.97,
+      "width": 364,
+      "height": 256,
+      "frames_reported": 2905,
+      "frames_decoded": 2905
+    },
+    {
+      "video": "71.mp4",
+      "group": "71",
+      "split": "train",
+      "label_total_frames": 1128,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          1128
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "c50bf096380d8121cd09fc76fc307b0aec21563541b69d37e3076884a82e306a",
+      "readable": true,
+      "fps": 25.0,
+      "width": 598,
+      "height": 582,
+      "frames_reported": 1128,
+      "frames_decoded": 1128
+    },
+    {
+      "video": "72.mp4",
+      "group": "72",
+      "split": "val",
+      "label_total_frames": 400,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          400
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "fc0bf2556489d6ccd79fe237774ea0fab4fa846078b0b61317c79f08349fe715",
+      "readable": true,
+      "fps": 30.0,
+      "width": 1218,
+      "height": 512,
+      "frames_reported": 400,
+      "frames_decoded": 400
+    },
+    {
+      "video": "75.mp4",
+      "group": "75",
+      "split": "train",
+      "label_total_frames": 712,
+      "label_fps": 25,
+      "segments": [
+        [
+          80,
+          687
+        ]
+      ],
+      "anomaly_fraction": 0.8539,
+      "sha256": "5dd21a282e32ff06fccb139b53868f0973c21ebc5dd75e9d162ebba78ffd9ed5",
+      "readable": true,
+      "fps": 25.0,
+      "width": 480,
+      "height": 360,
+      "frames_reported": 712,
+      "frames_decoded": 687
+    },
+    {
+      "video": "76.mp4",
+      "group": "76",
+      "split": "train",
+      "label_total_frames": 816,
+      "label_fps": 25,
+      "segments": [
+        [
+          38,
+          699
+        ]
+      ],
+      "anomaly_fraction": 0.8113,
+      "sha256": "28ad283d8ce6b7f122d5eeda7c4da742aeafe55d58581bddbea7e5334da60fb6",
+      "readable": true,
+      "fps": 25.0,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 816,
+      "frames_decoded": 812
+    },
+    {
+      "video": "78.mp4",
+      "group": "78",
+      "split": "train",
+      "label_total_frames": 510,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          510
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "e6cdd11dd342d5e655f5a41f04125186c0c8764d1d759bf7dccaaf39d4cc3168",
+      "readable": true,
+      "fps": 25.0,
+      "width": 362,
+      "height": 258,
+      "frames_reported": 510,
+      "frames_decoded": 510
+    },
+    {
+      "video": "80.mp4",
+      "group": "80",
+      "split": "test",
+      "label_total_frames": 1811,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          1811
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "7eea1987cb10a19118f4e1ce927d0c75babc311d2313644bc5eb4ce7abf5db1b",
+      "readable": true,
+      "fps": 25.0,
+      "width": 478,
+      "height": 220,
+      "frames_reported": 1811,
+      "frames_decoded": 1811
+    },
+    {
+      "video": "82a.mp4",
+      "group": "82",
+      "split": "test",
+      "label_total_frames": 390,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          389
+        ]
+      ],
+      "anomaly_fraction": 0.9974,
+      "sha256": "c6cd4ac78a0ab96e41603b83dfbf711848ab6cc0b5499bfe14ca547bb773e5de",
+      "readable": true,
+      "fps": 24.776,
+      "width": 450,
+      "height": 306,
+      "frames_reported": 390,
+      "frames_decoded": 389
+    },
+    {
+      "video": "82b.mp4",
+      "group": "82",
+      "split": "test",
+      "label_total_frames": 77,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          76
+        ]
+      ],
+      "anomaly_fraction": 0.987,
+      "sha256": "68809e5f112dd7a83c6b437803711eea5922e000b146d2a2f211930bfb9d5054",
+      "readable": true,
+      "fps": 24.432,
+      "width": 450,
+      "height": 306,
+      "frames_reported": 77,
+      "frames_decoded": 76
+    },
+    {
+      "video": "83.mp4",
+      "group": "83",
+      "split": "train",
+      "label_total_frames": 166,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          166
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "67852b77c85266f42960af691f4a5dae29bd0b81dc3467017a1f8d2c2ced4958",
+      "readable": true,
+      "fps": 30.0,
+      "width": 1098,
+      "height": 602,
+      "frames_reported": 166,
+      "frames_decoded": 166
+    },
+    {
+      "video": "84.mp4",
+      "group": "84",
+      "split": "val",
+      "label_total_frames": 1576,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          1576
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "e5f992330ba0af38e9e80f7d63525eeceaae630a3cf77a88feb216b7f8d43373",
+      "readable": true,
+      "fps": 25.0,
+      "width": 450,
+      "height": 470,
+      "frames_reported": 1576,
+      "frames_decoded": 1576
+    },
+    {
+      "video": "85.mp4",
+      "group": "85",
+      "split": "test",
+      "label_total_frames": 7558,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          395
+        ],
+        [
+          566,
+          709
+        ],
+        [
+          951,
+          1187
+        ],
+        [
+          1551,
+          6258
+        ]
+      ],
+      "anomaly_fraction": 0.7256,
+      "sha256": "9c0346358158e169b98154515c5da95f1fc9f450709d3f72057bd24c880a8e90",
+      "readable": true,
+      "fps": 25.0,
+      "width": 1280,
+      "height": 720,
+      "frames_reported": 7558,
+      "frames_decoded": 7558
+    },
+    {
+      "video": "87.mp4",
+      "group": "87",
+      "split": "train",
+      "label_total_frames": 3158,
+      "label_fps": 25,
+      "segments": [
+        [
+          1,
+          2264
+        ]
+      ],
+      "anomaly_fraction": 0.7169,
+      "sha256": "0653287e3b95da3008152390105b17e77779cc933856756c491f761e6143c0e8",
+      "readable": true,
+      "fps": 24.132,
+      "width": 640,
+      "height": 360,
+      "frames_reported": 3158,
+      "frames_decoded": 3143
+    },
+    {
+      "video": "88.mp4",
+      "group": "88",
+      "split": "test",
+      "label_total_frames": 1173,
+      "label_fps": 30,
+      "segments": [
+        [
+          1,
+          1173
+        ]
+      ],
+      "anomaly_fraction": 1.0,
+      "sha256": "e75cd644eb6bc5827e816b4d643dca57f86f1809c7c3740ff65e667c2bf9f49d",
+      "readable": true,
+      "fps": 30.0,
+      "width": 1078,
+      "height": 718,
+      "frames_reported": 1173,
+      "frames_decoded": 1173
+    },
+    {
+      "video": "89.mp4",
+      "group": "89",
+      "split": "val",
+      "label_total_frames": 3058,
+      "label_fps": 30,
+      "segments": [
+        [
+          707,
+          2915
+        ]
+      ],
+      "anomaly_fraction": 0.7224,
+      "sha256": "96160545e6da596ec927d8d5f623f345f611764d8fd728559ba84d39e5ca0cf3",
+      "readable": true,
+      "fps": 25.0,
+      "width": 320,
+      "height": 240,
+      "frames_reported": 3058,
+      "frames_decoded": 3058
+    },
+    {
+      "video": "90.mp4",
+      "group": "90",
+      "split": "val",
+      "label_total_frames": 2081,
+      "label_fps": 25,
+      "segments": [
+        [
+          199,
+          2081
+        ]
+      ],
+      "anomaly_fraction": 0.9049,
+      "sha256": "78fcb296c6a78f4045303952652ed7605489fa7200353ebf1f065cdb655eab0a",
+      "readable": true,
+      "fps": 25.0,
+      "width": 854,
+      "height": 326,
+      "frames_reported": 2081,
+      "frames_decoded": 2081
+    },
+    {
+      "video": "92.mp4",
+      "group": "92",
+      "split": "val",
+      "label_total_frames": 588,
+      "label_fps": 6,
+      "segments": [
+        [
+          225,
+          340
+        ]
+      ],
+      "anomaly_fraction": 0.1973,
+      "sha256": "1a6899a291cdc177cb46af69bc7ab35f63197a11ed40c06c8c71ad38cb52f3a6",
+      "readable": true,
+      "fps": 6.0,
+      "width": 352,
+      "height": 288,
+      "frames_reported": 588,
+      "frames_decoded": 588
+    },
+    {
+      "video": "93.mp4",
+      "group": "93",
+      "split": "test",
+      "label_total_frames": 2973,
+      "label_fps": 1,
+      "segments": [
+        [
+          82,
+          249
+        ],
+        [
+          492,
+          1129
+        ],
+        [
+          2600,
+          2973
+        ]
+      ],
+      "anomaly_fraction": 0.3969,
+      "sha256": "d5c5063f543c3f80cc7aaabfeee3344fd6fdf4a3e254de75cf533b6af4c78d2f",
+      "readable": true,
+      "fps": 25.0,
+      "width": 656,
+      "height": 354,
+      "frames_reported": 2973,
+      "frames_decoded": 2973
+    }
+  ]
+}

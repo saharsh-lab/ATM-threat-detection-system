@@ -1,0 +1,48 @@
+# SentinelX detector class schema (object-detection labels only).
+#
+# Video-level anomaly labels (ATMA-V, UCF-Crime, ...) are NOT part of this
+# schema. They live in data/registry/datasets.yaml and data/labels.py and are
+# only used to evaluate the end-to-end threat pipeline.
+#
+# `openimages`: Open Images V7 boxable LabelName MIDs merged into the class.
+# `coco`: COCO-80 class ids the *baseline* yolov8n.pt model can emit for the
+#         class (used only to map baseline predictions during evaluation).
+#         An empty list means the baseline model has no equivalent class.
+version: sentinelx-classes-v1
+classes:
+  - id: 0
+    name: person
+    openimages: {"/m/01g317": Person, "/m/04yx4": Man, "/m/03bt1vf": Woman, "/m/01bl7v": Boy, "/m/05r655": Girl}
+    coco: [0]
+  - id: 1
+    name: knife
+    openimages: {"/m/04ctx": Knife, "/m/058qzx": Kitchen knife, "/m/02gzp": Dagger}
+    coco: [43]
+  - id: 2
+    name: firearm
+    openimages: {"/m/0gxl3": Handgun, "/m/06c54": Rifle, "/m/06nrc": Shotgun}
+    coco: []
+  - id: 3
+    name: backpack
+    openimages: {"/m/01940j": Backpack}
+    coco: [24]
+  - id: 4
+    name: handbag
+    openimages: {"/m/080hkjn": Handbag}
+    coco: [26]
+  - id: 5
+    name: suitcase
+    openimages: {"/m/01s55n": Suitcase}
+    coco: [28]
+  - id: 6
+    name: bottle
+    openimages: {"/m/04dr76w": Bottle}
+    coco: [39]
+  - id: 7
+    name: helmet
+    openimages: {"/m/0zvk5": Helmet, "/m/03p3bw": Bicycle helmet}
+    coco: []
+  - id: 8
+    name: blunt_tool
+    openimages: {"/m/03l9g": Hammer, "/m/03g8mr": Baseball bat}
+    coco: [34]

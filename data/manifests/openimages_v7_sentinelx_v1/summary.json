@@ -1,0 +1,198 @@
+{
+  "dataset": "openimages_v7_sentinelx_v1",
+  "version": "6495ad20fbf022c7",
+  "created_utc": "2026-10-14T05:34:32+00:00",
+  "class_schema": "sentinelx-classes-v1",
+  "classes": [
+    "person",
+    "knife",
+    "firearm",
+    "backpack",
+    "handbag",
+    "suitcase",
+    "bottle",
+    "helmet",
+    "blunt_tool"
+  ],
+  "source": "Open Images V7 (https://storage.googleapis.com/openimages/web/index.html)",
+  "source_files": {
+    "train": {
+      "bbox": "https://storage.googleapis.com/openimages/v6/oidv6-train-annotations-bbox.csv",
+      "labels": "https://storage.googleapis.com/openimages/v7/oidv7-train-annotations-human-imagelabels.csv",
+      "meta": "https://storage.googleapis.com/openimages/2018_04/train/train-images-boxable-with-rotation.csv"
+    },
+    "validation": {
+      "bbox": "https://storage.googleapis.com/openimages/v5/validation-annotations-bbox.csv",
+      "labels": "https://storage.googleapis.com/openimages/v7/oidv7-val-annotations-human-imagelabels.csv",
+      "meta": "https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv"
+    },
+    "test": {
+      "bbox": "https://storage.googleapis.com/openimages/v5/test-annotations-bbox.csv",
+      "labels": "https://storage.googleapis.com/openimages/v7/oidv7-test-annotations-human-imagelabels.csv",
+      "meta": "https://storage.googleapis.com/openimages/2018_04/test/test-images-with-rotation.csv"
+    }
+  },
+  "image_mirror": "https://open-images-dataset.s3.amazonaws.com/{folder}/{image_id}.jpg",
+  "licenses": {
+    "annotations": "CC BY 4.0 (Google LLC)",
+    "images": "listed as CC BY 2.0 by Open Images; per-image author/licence in images.csv"
+  },
+  "processing": {
+    "max_side": 640,
+    "min_box_side": 0.002,
+    "dedup_iou": 0.85,
+    "near_dup_hamming": 4,
+    "seed": 42,
+    "caps": {
+      "train": {
+        "person": 2500,
+        "knife": 1500,
+        "firearm": 1500,
+        "backpack": 1200,
+        "handbag": 1200,
+        "suitcase": 1000,
+        "bottle": 1200,
+        "helmet": 1200,
+        "blunt_tool": 1000
+      },
+      "val": {
+        "person": 500,
+        "knife": 400,
+        "firearm": 400,
+        "backpack": 400,
+        "handbag": 400,
+        "suitcase": 400,
+        "bottle": 300,
+        "helmet": 300,
+        "blunt_tool": 400
+      },
+      "test": {
+        "person": 800,
+        "knife": 600,
+        "firearm": 600,
+        "backpack": 600,
+        "handbag": 600,
+        "suitcase": 600,
+        "bottle": 450,
+        "helmet": 450,
+        "blunt_tool": 600
+      }
+    }
+  },
+  "stats": {
+    "validation": {
+      "candidate_images": 11671,
+      "dropped_depiction_or_groupof": 3514,
+      "dropped_rotation_unknown_or_nonzero": 1220,
+      "dropped_license_not_cc_by_2": 0,
+      "dropped_missing_metadata": 0,
+      "dropped_incomplete_boxes": 26,
+      "eligible_images": 6911
+    },
+    "test": {
+      "candidate_images": 35231,
+      "dropped_depiction_or_groupof": 10538,
+      "dropped_rotation_unknown_or_nonzero": 3658,
+      "dropped_license_not_cc_by_2": 0,
+      "dropped_missing_metadata": 0,
+      "dropped_incomplete_boxes": 331,
+      "eligible_images": 20704
+    },
+    "train": {
+      "candidate_images": 819768,
+      "dropped_depiction_or_groupof": 151057,
+      "dropped_rotation_unknown_or_nonzero": 90325,
+      "dropped_license_not_cc_by_2": 0,
+      "dropped_missing_metadata": 0,
+      "dropped_incomplete_boxes": 11705,
+      "eligible_images": 566681,
+      "dropped_author_or_md5_overlap_with_heldout": 101956
+    },
+    "train_side_authors": 122,
+    "val_selected": 908,
+    "test_selected": 1443,
+    "train_selected": 6203,
+    "download_failures": 0,
+    "near_duplicates_dropped": {
+      "within_split": 27,
+      "cross_split": 6
+    },
+    "splits": {
+      "train": {
+        "images": 6178,
+        "boxes": {
+          "person": 12221,
+          "knife": 743,
+          "firearm": 1813,
+          "backpack": 585,
+          "handbag": 1224,
+          "suitcase": 349,
+          "bottle": 3661,
+          "helmet": 2602,
+          "blunt_tool": 873
+        },
+        "images_with_class": {
+          "person": 3404,
+          "knife": 577,
+          "firearm": 1249,
+          "backpack": 350,
+          "handbag": 939,
+          "suitcase": 226,
+          "bottle": 1200,
+          "helmet": 1200,
+          "blunt_tool": 794
+        }
+      },
+      "val": {
+        "images": 906,
+        "boxes": {
+          "person": 1075,
+          "knife": 102,
+          "firearm": 128,
+          "backpack": 29,
+          "handbag": 89,
+          "suitcase": 27,
+          "bottle": 319,
+          "helmet": 469,
+          "blunt_tool": 10
+        },
+        "images_with_class": {
+          "person": 499,
+          "knife": 72,
+          "firearm": 105,
+          "backpack": 26,
+          "handbag": 84,
+          "suitcase": 16,
+          "bottle": 166,
+          "helmet": 300,
+          "blunt_tool": 10
+        }
+      },
+      "test": {
+        "images": 1437,
+        "boxes": {
+          "person": 1723,
+          "knife": 121,
+          "firearm": 201,
+          "backpack": 61,
+          "handbag": 122,
+          "suitcase": 63,
+          "bottle": 614,
+          "helmet": 721,
+          "blunt_tool": 20
+        },
+        "images_with_class": {
+          "person": 799,
+          "knife": 89,
+          "firearm": 154,
+          "backpack": 44,
+          "handbag": 111,
+          "suitcase": 38,
+          "bottle": 311,
+          "helmet": 451,
+          "blunt_tool": 16
+        }
+      }
+    }
+  }
+}
