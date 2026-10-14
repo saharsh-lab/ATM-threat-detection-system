@@ -1,0 +1,43 @@
+# SentinelX camera configuration (example).
+#
+# Copy to config/cameras.yaml (git-ignored) and edit. If config/cameras.yaml
+# does not exist this example is used, which replays two ATMA-V research
+# videos as RECORDED sources — they are never presented as live cameras.
+#
+# Zones are polygons in normalised [0, 1] image coordinates:
+#   atm_zone    area in front of the machine (dwell / multi-person / object rules)
+#   restricted  optional areas nobody should enter (service door, cash panel)
+#
+# Network cameras: put the RTSP/HTTP URL (including credentials) in an
+# environment variable and reference its NAME with `url_env`. Never write
+# credentials into this file.
+
+cameras:
+  - id: cam-01
+    name: Vestibule A (replay)
+    location: Demo branch — ATMA-V video 28
+    source: {type: file, file: 28.mp4}
+    zones:
+      atm_zone: [[0.05, 0.05], [0.95, 0.05], [0.95, 0.95], [0.05, 0.95]]
+      loitering_seconds: 20
+
+  - id: cam-02
+    name: Vestibule B (replay)
+    location: Demo branch — ATMA-V video 30a
+    source: {type: file, file: 30a.mp4}
+    zones:
+      atm_zone: [[0.05, 0.05], [0.95, 0.05], [0.95, 0.95], [0.05, 0.95]]
+
+  # - id: cam-03
+  #   name: Branch 12 lobby (live)
+  #   location: 12 Main St
+  #   source: {type: rtsp, url_env: SENTINELX_CAM03_URL}
+  #   zones:
+  #     atm_zone: [[0.30, 0.20], [0.75, 0.20], [0.80, 1.00], [0.25, 1.00]]
+  #     restricted: [[[0.80, 0.10], [0.98, 0.10], [0.98, 0.60], [0.80, 0.60]]]
+  #     loitering_seconds: 45
+
+  # - id: cam-04
+  #   name: Lab webcam (live)
+  #   source: {type: webcam, index: 0}
+  #   enabled: false
