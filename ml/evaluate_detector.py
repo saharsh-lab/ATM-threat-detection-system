@@ -254,6 +254,49 @@ def bootstrap_map50(recs_by_model: dict, classes_by_model: dict, n_classes: int,
     return out
 
 
+def pycocotools_check(gts, preds, n_classes, ours_ap):
+    """Re-score the same predictions with the reference COCO implementation.
+    Returns max |difference| in per-class AP50 / AP50-95, or None if
+    pycocotools is not installed."""
+    try:
+        import contextlib
+        import io
+        from pycocotools.coco import COCO
+        from pycocotools.cocoeval import COCOeval
+    except ImportError:
+        return None
+    images, anns, dets, aid = [], [], [], 1
+    for i, (g, p) in enumerate(zip(gts, preds)):
+        images.append({"id": i})
+        for b, c in zip(g["boxes"], g["cls"]):
+            w, hh = b[2] - b[0], b[3] - b[1]
+            anns.append({"id": aid, "image_id": i, "category_id": int(c), "iscrowd": 0, "area": float(w * hh),
+                         "bbox": [float(b[0]), float(b[1]), float(w), float(hh)]})
+            aid += 1
+        for b, c, sc in zip(p["boxes"], p["cls"], p["conf"]):
+            dets.append({"image_id": i, "category_id": int(c), "score": float(sc),
+                         "bbox": [float(b[0]), float(b[1]), float(b[2] - b[0]), float(b[3] - b[1])]})
+    if not dets:
+        return None
+    gt = COCO()
+    gt.dataset = {"images": images, "annotations": anns, "categories": [{"id": k} for k in range(n_classes)]}
+    with contextlib.redirect_stdout(io.StringIO()):
+        gt.createIndex()
+        ev = COCOeval(gt, gt.loadRes(dets), "bbox")
+        ev.params.maxDets = [1, 10, 300]
+        ev.evaluate()
+        ev.accumulate()
+    prec = ev.eval["precision"]
+    d50, d = [], []
+    for k in range(n_classes):
+        pc = prec[:, :, k, 0, -1]
+        if (pc[0] > -1).any() and not np.isnan(ours_ap[k, 0]):
+            d50.append(abs(pc[0][pc[0] > -1].mean() - ours_ap[k, 0]))
+            d.append(abs(pc[pc > -1].mean() - np.nanmean(ours_ap[k])))
+    return {"reference": "pycocotools COCOeval (maxDets 300)", "max_abs_diff_ap50": _r(max(d50), 5) if d50 else None,
+            "max_abs_diff_ap50_95": _r(max(d), 5) if d else None}
+
+
 def save_confusion_png(mat, names, title, path):
     import matplotlib
     matplotlib.use("Agg")
@@ -337,6 +380,7 @@ def main(argv=None):
                                  "matrix": cm.tolist()},
             "latency": [measure_latency(mid, gts, d, args.imgsz) for d in latency_devices],
         }
+        report["models"][mid]["metric_check"] = pycocotools_check(gts, preds, n, ap)
         recs_by_model[mid] = recs
         classes_by_model[mid] = supported
         print(f"{mid}: mAP50(supported)={report['models'][mid]['map50_supported']} "
@@ -404,6 +448,11 @@ def write_markdown(rep, path):
         for lt in rep["models"][m]["latency"]:
             L.append(f"| `{m}` | {lt['device']} | {lt['mean_ms']} | {lt['p50_ms']} | {lt['p95_ms']} | {lt['fps']} |")
     L += ["", "## Confusion matrices", ""] + [f"![{m}](confusion_{m}.png)" for m in models]
+    checks = {m: rep["models"][m].get("metric_check") for m in models}
+    if any(checks.values()):
+        L += ["", "## Metric implementation check", "",
+              "The same predictions were re-scored with the reference `pycocotools` COCOeval:"]
+        L += [f"- `{m}`: max |ΔAP50| = {c['max_abs_diff_ap50']}, max |ΔAP50-95| = {c['max_abs_diff_ap50_95']}" for m, c in checks.items() if c]
     L += ["", f"Environment: {rep['environment']['platform']}, Python {rep['environment']['python']}.", ""]
     with open(path, "w") as f:
         f.write("\n".join(L))

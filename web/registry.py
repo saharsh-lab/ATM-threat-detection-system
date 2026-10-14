@@ -18,6 +18,9 @@ DATASETS_YAML = os.path.join(config.BASE_DIR, "data", "registry", "datasets.yaml
 REPORTS = {
     "detector": os.path.join(config.BASE_DIR, "reports", "detector", "report.json"),
     "pipeline": os.path.join(config.BASE_DIR, "reports", "pipeline", "report.json"),
+    "training": os.path.join(config.BASE_DIR, "reports", "training", "sentinelx-det-v1", "train_meta.json"),
+    "temporal_coco": os.path.join(config.BASE_DIR, "reports", "temporal", "yolov8n-coco.json"),
+    "temporal_sentinelx": os.path.join(config.BASE_DIR, "reports", "temporal", "sentinelx-det-v1.json"),
 }
 STATIC_EXPORT = os.path.join(config.BASE_DIR, "static", "data", "platform.json")
 
@@ -95,7 +98,7 @@ def export_static(path: str = STATIC_EXPORT):
         json.dump(data, f, indent=1, default=str)
     src_root = os.path.join(config.BASE_DIR, "reports")
     dst_root = os.path.join(config.BASE_DIR, "static", "reports")
-    for group in ("detector", "pipeline"):
+    for group in ("detector", "pipeline", os.path.join("training", "sentinelx-det-v1")):
         src = os.path.join(src_root, group)
         if not os.path.isdir(src):
             continue

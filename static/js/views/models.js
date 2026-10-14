@@ -7,27 +7,53 @@ import { columnChart, seriesColors } from "../lib/charts.js";
 const pct = (x) => (x === null || x === undefined ? "—" : (x * 100).toFixed(1));
 
 export async function render(root, ctx) {
-  const [det, pipe] = await Promise.all([ctx.api.report("detector").catch(() => null), ctx.api.report("pipeline").catch(() => null)]);
+  const [det, pipe, train, tco, tsx] = await Promise.all(["detector", "pipeline", "training", "temporal_coco", "temporal_sentinelx"]
+    .map((n) => ctx.api.report(n).catch(() => null)));
   root.append(h("div", { class: "note", text: "All figures on this page are loaded from committed evaluation reports (reports/detector, reports/pipeline) produced by the evaluation scripts. Nothing is entered by hand." }));
   if (!det) root.append(h("div", { class: "card empty", text: "Detector report not generated yet — run: python -m ml.evaluate_detector" }));
   else renderDetector(root, det);
   if (!pipe) root.append(h("div", { class: "card empty", text: "Pipeline report not generated yet — run: python -m ml.evaluate_pipeline" }));
   else renderPipeline(root, pipe);
+  renderTemporal(root, [tco, tsx].filter(Boolean));
+  if (train) renderTraining(root, train);
+}
+
+function renderTemporal(root, heads) {
+  if (!heads.length) return;
+  root.append(h("section", { class: "card" }, h("div", { class: "card-head" }, h("h2", { text: "Learned temporal head" }),
+    h("span", { class: "sub", text: "fitted on ATMA-V train, selected on val — test never used" })),
+    h("div", { class: "table-wrap" }, h("table", {},
+      h("thead", {}, h("tr", {}, ["Detector", "Train videos", "Val videos", "Features", "C", "Val AUC", "Threshold", "Top features (coef.)"].map((x, i) => h("th", { class: i && i < 7 ? "num" : "", text: x })))),
+      h("tbody", {}, heads.map((t) => h("tr", {}, h("td", { class: "mono", text: t.detector }),
+        h("td", { class: "num", text: String(t.train.videos) }), h("td", { class: "num", text: String(t.val.videos) }),
+        h("td", { class: "num", text: t.chosen.features }), h("td", { class: "num", text: String(t.chosen.C) }),
+        h("td", { class: "num", text: String(t.chosen.val_auc) }), h("td", { class: "num", text: String(t.chosen.threshold) }),
+        h("td", { class: "mono wrap", text: t.top_coefficients.filter((c) => c.coef !== 0).slice(0, 4).map((c) => `${c.feature} ${c.coef > 0 ? "+" : ""}${c.coef}`).join(", ") }))))))));
+}
+
+function renderTraining(root, t) {
+  root.append(h("section", { class: "card" }, h("div", { class: "card-head" }, h("h2", { text: `Training run · ${t.run_id}` }),
+    h("span", { class: "sub", text: `${t.dataset.id}@${t.dataset.version} · device ${t.effective_train_args.device} · ${(t.wall_time_seconds / 3600).toFixed(1)} h · commit ${t.git_commit.slice(0, 7)}` })),
+    h("img", { class: "figure-img", src: "/static/reports/training/sentinelx-det-v1/results.png", alt: "Training and validation loss and metric curves per epoch (values in reports/training/sentinelx-det-v1/results.csv)", loading: "lazy" })));
 }
 
 function renderDetector(root, det) {
   const models = Object.keys(det.models);
   const colors = seriesColors();
-  const [base, cand] = [models[0], models[models.length - 1]];
+  // baseline = the COCO model; candidate = the other one (never rely on key order)
+  const base = models.find((m) => det.models[m].schema === "coco") || models[0];
+  const cand = models.find((m) => m !== base) || base;
+  models.sort((a, b) => (a === base ? -1 : b === base ? 1 : 0));
   const B = det.models[base], N = det.models[cand];
   const delta = (a, b) => (a === null || b === null || a === undefined || b === undefined ? null : b - a);
-  const tile = (label, a, b, fmtv, foot) => {
+  const tile = (label, a, b, fmtv, foot, lowerIsBetter = false) => {
     const d = delta(a, b);
+    const good = d !== null && (lowerIsBetter ? d <= 0 : d >= 0);
     return h("div", { class: "card stat" }, h("div", { class: "label", text: label }),
       h("div", { class: "value", text: fmtv(b) }),
-      h("div", { class: "foot" }, `${base}: ${fmtv(a)} · `, d === null ? "" : h("span", { class: d >= 0 ? "delta-up" : "delta-down", text: `${d >= 0 ? "+" : ""}${fmtv(d)}` }), foot ? ` ${foot}` : ""));
+      h("div", { class: "foot" }, `${cand} · baseline ${fmtv(a)} · `, d === null ? "" : h("span", { class: good ? "delta-up" : "delta-down", text: `${d >= 0 ? "+" : ""}${fmtv(d)}` }), foot ? ` ${foot}` : ""));
   };
-  const lat = (m, dev) => (m.latency || []).find((l) => l.device === dev)?.mean_ms;
+  const lat = (m, dev) => (m.latency || []).find((l) => l.device === dev)?.p50_ms;
   const devs = [...new Set(models.flatMap((m) => det.models[m].latency.map((l) => l.device)))];
   const ci = det.bootstrap?.difference_shared_map50;
   root.append(h("section", { class: "card" },
@@ -37,7 +63,7 @@ function renderDetector(root, det) {
       tile("mAP50, shared classes", B.map50_shared, N.map50_shared, (v) => (v === null ? "—" : `${pct(v)}`), "pts"),
       tile("mAP50-95, shared classes", B.map50_95_shared, N.map50_95_shared, (v) => (v === null ? "—" : `${pct(v)}`), "pts"),
       tile("mAP50, all 9 classes", B.map50_all_classes, N.map50_all_classes, (v) => (v === null ? "—" : `${pct(v)}`), "pts (unsupported = 0)"),
-      tile(`Latency (${devs[0]})`, lat(B, devs[0]), lat(N, devs[0]), (v) => (v === null || v === undefined ? "—" : `${v.toFixed(1)} ms`), "")),
+      tile(`Median latency (${devs[0]})`, lat(B, devs[0]), lat(N, devs[0]), (v) => (v === null || v === undefined ? "—" : `${v.toFixed(1)} ms`), "", true)),
     ci ? h("p", { class: "muted", style: { fontSize: "12.5px", margin: "14px 0 0" },
       text: `Bootstrap (${det.bootstrap.n_boot} image resamples): shared-class mAP50 difference ${ci.models} = ${pct(ci.mean)} pts, 95% CI [${pct(ci.ci95[0])}, ${pct(ci.ci95[1])}]. Shared classes: ${det.shared_classes.join(", ")}.` }) : null));
 

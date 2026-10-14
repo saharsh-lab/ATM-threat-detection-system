@@ -73,6 +73,8 @@ def create_app(start_cameras: bool = True, db_path: str | None = None, testing: 
         PLATFORM_MODE="live",
     )
 
+    app.json.sort_keys = False          # keep report/model order as written (Flask 3 sorts by default)
+
     if db_path != ":memory:":
         ensure_instance_dirs()
     applied = dbm.migrate(db_path)

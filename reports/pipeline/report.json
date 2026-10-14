@@ -1,0 +1,1401 @@
+{
+  "generated_utc": "2026-10-14T10:14:00+00:00",
+  "protocol": {
+    "incident_threshold": 50,
+    "high_threshold": 75,
+    "temporal_heads": "trained on ATMA-V train split, selected on val (ml/train_temporal.py)",
+    "v2_infer_fps": 10.0,
+    "v2_engine": "rules-v2",
+    "device": "cpu",
+    "zones": "default ATM zone (5%-95% of frame) for every video \u2014 no per-video tuning"
+  },
+  "variants": {
+    "v0": {
+      "detector": "yolov8n-coco (v0 settings)",
+      "atmav": {
+        "test": {
+          "split": "test",
+          "videos": 21,
+          "anomalous_videos": 13,
+          "frames": 26163,
+          "anomalous_frames": 16627,
+          "frame_auc": 0.4988,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.6826,
+            "recall": 0.2841,
+            "f1": 0.4012,
+            "fpr": 0.2303,
+            "tp": 4723,
+            "fp": 2196,
+            "fn": 11904,
+            "tn": 7340
+          },
+          "at_high": {
+            "threshold": 75,
+            "precision": 0.5564,
+            "recall": 0.0279,
+            "f1": 0.0531,
+            "fpr": 0.0388,
+            "tp": 464,
+            "fp": 370,
+            "fn": 16163,
+            "tn": 9166
+          },
+          "video_detection_rate": 0.6923,
+          "videos_with_false_alarm": 0.2857,
+          "false_alarms_per_min_normal": {
+            "incident": 3.616,
+            "high": 1.5722,
+            "events_incident": 23,
+            "normal_minutes": 6.36
+          },
+          "rule_activations": {},
+          "per_video": [
+            {
+              "video": "3.mp4",
+              "anomalous": true,
+              "frames": 737,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "10.mp4",
+              "anomalous": true,
+              "frames": 1796,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": 0.9472
+            },
+            {
+              "video": "12.mp4",
+              "anomalous": false,
+              "frames": 910,
+              "max_score": 60,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "15.mp4",
+              "anomalous": false,
+              "frames": 446,
+              "max_score": 47,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "18.mp4",
+              "anomalous": true,
+              "frames": 378,
+              "max_score": 35,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": 0.602
+            },
+            {
+              "video": "22.mp4",
+              "anomalous": false,
+              "frames": 1030,
+              "max_score": 90,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "23.mp4",
+              "anomalous": false,
+              "frames": 578,
+              "max_score": 65,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36a.mp4",
+              "anomalous": false,
+              "frames": 319,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36b.mp4",
+              "anomalous": true,
+              "frames": 1884,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36c.mp4",
+              "anomalous": true,
+              "frames": 544,
+              "max_score": 65,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "47.mp4",
+              "anomalous": false,
+              "frames": 146,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "50.mp4",
+              "anomalous": false,
+              "frames": 318,
+              "max_score": 15,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "53.mp4",
+              "anomalous": true,
+              "frames": 322,
+              "max_score": 35,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": 0.7834
+            },
+            {
+              "video": "66.mp4",
+              "anomalous": false,
+              "frames": 628,
+              "max_score": 60,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "69.mp4",
+              "anomalous": true,
+              "frames": 2147,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": 0.9533
+            },
+            {
+              "video": "80.mp4",
+              "anomalous": true,
+              "frames": 1811,
+              "max_score": 90,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82a.mp4",
+              "anomalous": true,
+              "frames": 389,
+              "max_score": 35,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82b.mp4",
+              "anomalous": true,
+              "frames": 76,
+              "max_score": 35,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "85.mp4",
+              "anomalous": true,
+              "frames": 7558,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.6784
+            },
+            {
+              "video": "88.mp4",
+              "anomalous": true,
+              "frames": 1173,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "93.mp4",
+              "anomalous": true,
+              "frames": 2973,
+              "max_score": 90,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.114
+            }
+          ]
+        }
+      },
+      "scfd": {
+        "test": {
+          "split": "test",
+          "clips": 179,
+          "fight": 89,
+          "noFight": 90,
+          "clip_auc_peak_score": 0.6386,
+          "clip_auc_mean_score": 0.62,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.75,
+            "recall": 0.0674,
+            "f1": 0.1237,
+            "fpr": 0.0222,
+            "tp": 6,
+            "fp": 2,
+            "fn": 83,
+            "tn": 88
+          },
+          "rule_fired_share": {
+            "fight": {},
+            "noFight": {}
+          }
+        }
+      },
+      "wall_time_s": 883
+    },
+    "v2-coco": {
+      "detector": "yolov8n-coco",
+      "atmav": {
+        "test": {
+          "split": "test",
+          "videos": 21,
+          "anomalous_videos": 13,
+          "frames": 26163,
+          "anomalous_frames": 16627,
+          "frame_auc": 0.4074,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.5557,
+            "recall": 0.1293,
+            "f1": 0.2098,
+            "fpr": 0.1803,
+            "tp": 2150,
+            "fp": 1719,
+            "fn": 14477,
+            "tn": 7817
+          },
+          "at_high": {
+            "threshold": 75,
+            "precision": 1.0,
+            "recall": 0.0043,
+            "f1": 0.0086,
+            "fpr": 0.0,
+            "tp": 72,
+            "fp": 0,
+            "fn": 16555,
+            "tn": 9536
+          },
+          "video_detection_rate": 0.4615,
+          "videos_with_false_alarm": 0.3333,
+          "false_alarms_per_min_normal": {
+            "incident": 2.8299,
+            "high": 0.0,
+            "events_incident": 18,
+            "normal_minutes": 6.36
+          },
+          "rule_activations": {
+            "multiple_persons": 1512,
+            "close_proximity": 739,
+            "loitering": 809,
+            "rapid_motion": 95,
+            "vandalism": 697,
+            "weapon": 469
+          },
+          "per_video": [
+            {
+              "video": "3.mp4",
+              "anomalous": true,
+              "frames": 737,
+              "max_score": 24,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "10.mp4",
+              "anomalous": true,
+              "frames": 1796,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": 0.9503
+            },
+            {
+              "video": "12.mp4",
+              "anomalous": false,
+              "frames": 910,
+              "max_score": 65,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "15.mp4",
+              "anomalous": false,
+              "frames": 446,
+              "max_score": 34,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "18.mp4",
+              "anomalous": true,
+              "frames": 378,
+              "max_score": 35,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": 0.7074
+            },
+            {
+              "video": "22.mp4",
+              "anomalous": false,
+              "frames": 1030,
+              "max_score": 70,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "23.mp4",
+              "anomalous": false,
+              "frames": 578,
+              "max_score": 70,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36a.mp4",
+              "anomalous": false,
+              "frames": 319,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36b.mp4",
+              "anomalous": true,
+              "frames": 1884,
+              "max_score": 49,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36c.mp4",
+              "anomalous": true,
+              "frames": 544,
+              "max_score": 65,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "47.mp4",
+              "anomalous": false,
+              "frames": 146,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "50.mp4",
+              "anomalous": false,
+              "frames": 318,
+              "max_score": 0,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "53.mp4",
+              "anomalous": true,
+              "frames": 322,
+              "max_score": 55,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.7974
+            },
+            {
+              "video": "66.mp4",
+              "anomalous": false,
+              "frames": 628,
+              "max_score": 55,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "69.mp4",
+              "anomalous": true,
+              "frames": 2147,
+              "max_score": 60,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": 0.9675
+            },
+            {
+              "video": "80.mp4",
+              "anomalous": true,
+              "frames": 1811,
+              "max_score": 30,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82a.mp4",
+              "anomalous": true,
+              "frames": 389,
+              "max_score": 30,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82b.mp4",
+              "anomalous": true,
+              "frames": 76,
+              "max_score": 0,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "85.mp4",
+              "anomalous": true,
+              "frames": 7558,
+              "max_score": 88,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.5845
+            },
+            {
+              "video": "88.mp4",
+              "anomalous": true,
+              "frames": 1173,
+              "max_score": 0,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "93.mp4",
+              "anomalous": true,
+              "frames": 2973,
+              "max_score": 65,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.1101
+            }
+          ]
+        }
+      },
+      "scfd": {
+        "test": {
+          "split": "test",
+          "clips": 179,
+          "fight": 89,
+          "noFight": 90,
+          "clip_auc_peak_score": 0.6359,
+          "clip_auc_mean_score": 0.6331,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 1.0,
+            "recall": 0.0112,
+            "f1": 0.0222,
+            "fpr": 0.0,
+            "tp": 1,
+            "fp": 0,
+            "fn": 88,
+            "tn": 90
+          },
+          "rule_fired_share": {
+            "fight": {
+              "close_proximity": 0.7303,
+              "multiple_persons": 0.8989,
+              "rapid_motion": 0.0112,
+              "threat_object": 0.0112
+            },
+            "noFight": {
+              "close_proximity": 0.4889,
+              "multiple_persons": 0.6333,
+              "rapid_motion": 0.0111
+            }
+          }
+        }
+      },
+      "wall_time_s": 19
+    },
+    "v2-coco+temporal": {
+      "detector": "yolov8n-coco",
+      "atmav": {
+        "test": {
+          "split": "test",
+          "videos": 21,
+          "anomalous_videos": 13,
+          "frames": 26163,
+          "anomalous_frames": 16627,
+          "frame_auc": 0.6276,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.7019,
+            "recall": 0.9119,
+            "f1": 0.7932,
+            "fpr": 0.6753,
+            "tp": 15162,
+            "fp": 6440,
+            "fn": 1465,
+            "tn": 3096
+          },
+          "at_high": {
+            "threshold": 75,
+            "precision": 0.7511,
+            "recall": 0.3533,
+            "f1": 0.4805,
+            "fpr": 0.2042,
+            "tp": 5874,
+            "fp": 1947,
+            "fn": 10753,
+            "tn": 7589
+          },
+          "video_detection_rate": 1.0,
+          "videos_with_false_alarm": 0.619,
+          "false_alarms_per_min_normal": {
+            "incident": 2.9871,
+            "high": 1.8866,
+            "events_incident": 19,
+            "normal_minutes": 6.36
+          },
+          "rule_activations": {
+            "learned_anomaly": 5419,
+            "multiple_persons": 1512,
+            "close_proximity": 739,
+            "loitering": 809,
+            "rapid_motion": 95,
+            "vandalism": 697,
+            "weapon": 469
+          },
+          "per_video": [
+            {
+              "video": "3.mp4",
+              "anomalous": true,
+              "frames": 737,
+              "max_score": 72,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "10.mp4",
+              "anomalous": true,
+              "frames": 1796,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.9527
+            },
+            {
+              "video": "12.mp4",
+              "anomalous": false,
+              "frames": 910,
+              "max_score": 65,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "15.mp4",
+              "anomalous": false,
+              "frames": 446,
+              "max_score": 62,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "18.mp4",
+              "anomalous": true,
+              "frames": 378,
+              "max_score": 70,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.8127
+            },
+            {
+              "video": "22.mp4",
+              "anomalous": false,
+              "frames": 1030,
+              "max_score": 100,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "23.mp4",
+              "anomalous": false,
+              "frames": 578,
+              "max_score": 70,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36a.mp4",
+              "anomalous": false,
+              "frames": 319,
+              "max_score": 70,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36b.mp4",
+              "anomalous": true,
+              "frames": 1884,
+              "max_score": 99,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36c.mp4",
+              "anomalous": true,
+              "frames": 544,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "47.mp4",
+              "anomalous": false,
+              "frames": 146,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "50.mp4",
+              "anomalous": false,
+              "frames": 318,
+              "max_score": 50,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "53.mp4",
+              "anomalous": true,
+              "frames": 322,
+              "max_score": 79,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.5875
+            },
+            {
+              "video": "66.mp4",
+              "anomalous": false,
+              "frames": 628,
+              "max_score": 55,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "69.mp4",
+              "anomalous": true,
+              "frames": 2147,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.9532
+            },
+            {
+              "video": "80.mp4",
+              "anomalous": true,
+              "frames": 1811,
+              "max_score": 74,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82a.mp4",
+              "anomalous": true,
+              "frames": 389,
+              "max_score": 80,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82b.mp4",
+              "anomalous": true,
+              "frames": 76,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "85.mp4",
+              "anomalous": true,
+              "frames": 7558,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.5728
+            },
+            {
+              "video": "88.mp4",
+              "anomalous": true,
+              "frames": 1173,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "93.mp4",
+              "anomalous": true,
+              "frames": 2973,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.134
+            }
+          ]
+        }
+      },
+      "scfd": {
+        "test": {
+          "split": "test",
+          "clips": 179,
+          "fight": 89,
+          "noFight": 90,
+          "clip_auc_peak_score": 0.7169,
+          "clip_auc_mean_score": 0.7219,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.594,
+            "recall": 0.8876,
+            "f1": 0.7117,
+            "fpr": 0.6,
+            "tp": 79,
+            "fp": 54,
+            "fn": 10,
+            "tn": 36
+          },
+          "rule_fired_share": {
+            "fight": {
+              "close_proximity": 0.7303,
+              "learned_anomaly": 0.9775,
+              "multiple_persons": 0.8989,
+              "rapid_motion": 0.0112,
+              "threat_object": 0.0112
+            },
+            "noFight": {
+              "close_proximity": 0.4889,
+              "learned_anomaly": 0.7444,
+              "multiple_persons": 0.6333,
+              "rapid_motion": 0.0111
+            }
+          }
+        }
+      },
+      "wall_time_s": 1
+    },
+    "v2-sentinelx": {
+      "detector": "sentinelx-det-v1",
+      "atmav": {
+        "test": {
+          "split": "test",
+          "videos": 21,
+          "anomalous_videos": 13,
+          "frames": 26163,
+          "anomalous_frames": 16627,
+          "frame_auc": 0.4394,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.5653,
+            "recall": 0.1231,
+            "f1": 0.2022,
+            "fpr": 0.1651,
+            "tp": 2047,
+            "fp": 1574,
+            "fn": 14580,
+            "tn": 7962
+          },
+          "at_high": {
+            "threshold": 75,
+            "precision": 0.532,
+            "recall": 0.0345,
+            "f1": 0.0647,
+            "fpr": 0.0529,
+            "tp": 573,
+            "fp": 504,
+            "fn": 16054,
+            "tn": 9032
+          },
+          "video_detection_rate": 0.6154,
+          "videos_with_false_alarm": 0.2381,
+          "false_alarms_per_min_normal": {
+            "incident": 1.1005,
+            "high": 0.4717,
+            "events_incident": 7,
+            "normal_minutes": 6.36
+          },
+          "rule_activations": {
+            "threat_object": 821,
+            "weapon": 464,
+            "multiple_persons": 503,
+            "close_proximity": 301,
+            "loitering": 300,
+            "face_concealment": 104,
+            "vandalism": 126,
+            "rapid_motion": 11,
+            "firearm": 302,
+            "blunt_tool": 85
+          },
+          "per_video": [
+            {
+              "video": "3.mp4",
+              "anomalous": true,
+              "frames": 737,
+              "max_score": 25,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "10.mp4",
+              "anomalous": true,
+              "frames": 1796,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": 0.9218
+            },
+            {
+              "video": "12.mp4",
+              "anomalous": false,
+              "frames": 910,
+              "max_score": 45,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "15.mp4",
+              "anomalous": false,
+              "frames": 446,
+              "max_score": 12,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "18.mp4",
+              "anomalous": true,
+              "frames": 378,
+              "max_score": 32,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": 0.8558
+            },
+            {
+              "video": "22.mp4",
+              "anomalous": false,
+              "frames": 1030,
+              "max_score": 24,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "23.mp4",
+              "anomalous": false,
+              "frames": 578,
+              "max_score": 50,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36a.mp4",
+              "anomalous": false,
+              "frames": 319,
+              "max_score": 20,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36b.mp4",
+              "anomalous": true,
+              "frames": 1884,
+              "max_score": 12,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36c.mp4",
+              "anomalous": true,
+              "frames": 544,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "47.mp4",
+              "anomalous": false,
+              "frames": 146,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "50.mp4",
+              "anomalous": false,
+              "frames": 318,
+              "max_score": 0,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "53.mp4",
+              "anomalous": true,
+              "frames": 322,
+              "max_score": 55,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.9551
+            },
+            {
+              "video": "66.mp4",
+              "anomalous": false,
+              "frames": 628,
+              "max_score": 47,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "69.mp4",
+              "anomalous": true,
+              "frames": 2147,
+              "max_score": 66,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.6755
+            },
+            {
+              "video": "80.mp4",
+              "anomalous": true,
+              "frames": 1811,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82a.mp4",
+              "anomalous": true,
+              "frames": 389,
+              "max_score": 37,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82b.mp4",
+              "anomalous": true,
+              "frames": 76,
+              "max_score": 0,
+              "alarm_in_anomaly": false,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "85.mp4",
+              "anomalous": true,
+              "frames": 7558,
+              "max_score": 90,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.4331
+            },
+            {
+              "video": "88.mp4",
+              "anomalous": true,
+              "frames": 1173,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "93.mp4",
+              "anomalous": true,
+              "frames": 2973,
+              "max_score": 80,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.2927
+            }
+          ]
+        }
+      },
+      "scfd": {
+        "test": {
+          "split": "test",
+          "clips": 179,
+          "fight": 89,
+          "noFight": 90,
+          "clip_auc_peak_score": 0.6031,
+          "clip_auc_mean_score": 0.5833,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.8571,
+            "recall": 0.0674,
+            "f1": 0.125,
+            "fpr": 0.0111,
+            "tp": 6,
+            "fp": 1,
+            "fn": 83,
+            "tn": 89
+          },
+          "rule_fired_share": {
+            "fight": {
+              "close_proximity": 0.4045,
+              "firearm": 0.0449,
+              "multiple_persons": 0.5281,
+              "threat_object": 0.1461
+            },
+            "noFight": {
+              "close_proximity": 0.3,
+              "face_concealment": 0.0222,
+              "firearm": 0.0222,
+              "multiple_persons": 0.4,
+              "threat_object": 0.0556
+            }
+          }
+        }
+      },
+      "wall_time_s": 0
+    },
+    "v2-sentinelx+temporal": {
+      "detector": "sentinelx-det-v1",
+      "atmav": {
+        "test": {
+          "split": "test",
+          "videos": 21,
+          "anomalous_videos": 13,
+          "frames": 26163,
+          "anomalous_frames": 16627,
+          "frame_auc": 0.6423,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.7309,
+            "recall": 0.9438,
+            "f1": 0.8238,
+            "fpr": 0.6058,
+            "tp": 15693,
+            "fp": 5777,
+            "fn": 934,
+            "tn": 3759
+          },
+          "at_high": {
+            "threshold": 75,
+            "precision": 0.701,
+            "recall": 0.342,
+            "f1": 0.4597,
+            "fpr": 0.2544,
+            "tp": 5687,
+            "fp": 2426,
+            "fn": 10940,
+            "tn": 7110
+          },
+          "video_detection_rate": 1.0,
+          "videos_with_false_alarm": 0.5238,
+          "false_alarms_per_min_normal": {
+            "incident": 1.8866,
+            "high": 1.7294,
+            "events_incident": 12,
+            "normal_minutes": 6.36
+          },
+          "rule_activations": {
+            "learned_anomaly": 5935,
+            "threat_object": 821,
+            "weapon": 464,
+            "multiple_persons": 503,
+            "close_proximity": 301,
+            "loitering": 300,
+            "face_concealment": 104,
+            "vandalism": 126,
+            "rapid_motion": 11,
+            "firearm": 302,
+            "blunt_tool": 85
+          },
+          "per_video": [
+            {
+              "video": "3.mp4",
+              "anomalous": true,
+              "frames": 737,
+              "max_score": 75,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "10.mp4",
+              "anomalous": true,
+              "frames": 1796,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.8858
+            },
+            {
+              "video": "12.mp4",
+              "anomalous": false,
+              "frames": 910,
+              "max_score": 50,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "15.mp4",
+              "anomalous": false,
+              "frames": 446,
+              "max_score": 12,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "18.mp4",
+              "anomalous": true,
+              "frames": 378,
+              "max_score": 62,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.9361
+            },
+            {
+              "video": "22.mp4",
+              "anomalous": false,
+              "frames": 1030,
+              "max_score": 50,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "23.mp4",
+              "anomalous": false,
+              "frames": 578,
+              "max_score": 57,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36a.mp4",
+              "anomalous": false,
+              "frames": 319,
+              "max_score": 62,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "36b.mp4",
+              "anomalous": true,
+              "frames": 1884,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "36c.mp4",
+              "anomalous": true,
+              "frames": 544,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "47.mp4",
+              "anomalous": false,
+              "frames": 146,
+              "max_score": 35,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "50.mp4",
+              "anomalous": false,
+              "frames": 318,
+              "max_score": 50,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": true,
+              "frame_auc": null
+            },
+            {
+              "video": "53.mp4",
+              "anomalous": true,
+              "frames": 322,
+              "max_score": 55,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.9551
+            },
+            {
+              "video": "66.mp4",
+              "anomalous": false,
+              "frames": 628,
+              "max_score": 47,
+              "alarm_in_anomaly": null,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "69.mp4",
+              "anomalous": true,
+              "frames": 2147,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.5986
+            },
+            {
+              "video": "80.mp4",
+              "anomalous": true,
+              "frames": 1811,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82a.mp4",
+              "anomalous": true,
+              "frames": 389,
+              "max_score": 87,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "82b.mp4",
+              "anomalous": true,
+              "frames": 76,
+              "max_score": 50,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "85.mp4",
+              "anomalous": true,
+              "frames": 7558,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.4167
+            },
+            {
+              "video": "88.mp4",
+              "anomalous": true,
+              "frames": 1173,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": false,
+              "frame_auc": null
+            },
+            {
+              "video": "93.mp4",
+              "anomalous": true,
+              "frames": 2973,
+              "max_score": 100,
+              "alarm_in_anomaly": true,
+              "alarm_in_normal": true,
+              "frame_auc": 0.2008
+            }
+          ]
+        }
+      },
+      "scfd": {
+        "test": {
+          "split": "test",
+          "clips": 179,
+          "fight": 89,
+          "noFight": 90,
+          "clip_auc_peak_score": 0.6512,
+          "clip_auc_mean_score": 0.7112,
+          "at_incident_threshold": {
+            "threshold": 50,
+            "precision": 0.5473,
+            "recall": 0.9101,
+            "f1": 0.6835,
+            "fpr": 0.7444,
+            "tp": 81,
+            "fp": 67,
+            "fn": 8,
+            "tn": 23
+          },
+          "rule_fired_share": {
+            "fight": {
+              "close_proximity": 0.4045,
+              "firearm": 0.0449,
+              "learned_anomaly": 0.9888,
+              "multiple_persons": 0.5281,
+              "threat_object": 0.1461
+            },
+            "noFight": {
+              "close_proximity": 0.3,
+              "face_concealment": 0.0222,
+              "firearm": 0.0222,
+              "learned_anomaly": 0.8444,
+              "multiple_persons": 0.4,
+              "threat_object": 0.0556
+            }
+          }
+        }
+      },
+      "wall_time_s": 0
+    }
+  }
+}

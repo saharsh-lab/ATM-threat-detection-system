@@ -1,0 +1,2852 @@
+{
+ "datasets": [
+  {
+   "id": "openimages_v7_sentinelx_v1",
+   "name": "Open Images V7 \u2014 SentinelX subset",
+   "status": "acquired",
+   "label_type": "bbox",
+   "used_for": "detector training / validation / test",
+   "source_url": "https://storage.googleapis.com/openimages/web/index.html",
+   "license": "Annotations CC BY 4.0 (Google LLC); images listed as CC BY 2.0 (per-image author recorded)",
+   "access": "public (official GCS annotation files, CVDF S3 image mirror)",
+   "redistribution": "Annotations (derived YOLO labels) committed with attribution; images NOT committed (size) \u2014 re-downloaded by script",
+   "manifest_path": "data/manifests/openimages_v7_sentinelx_v1/",
+   "acquire": "python -m ml.datasets.openimages reproduce",
+   "version": "6495ad20fbf022c7",
+   "stats": {
+    "train": 6178,
+    "val": 906,
+    "test": 1437
+   }
+  },
+  {
+   "id": "atmav",
+   "name": "ATM Anomaly Video Dataset (ATMA-V)",
+   "status": "acquired",
+   "label_type": "video_temporal",
+   "used_for": "end-to-end threat pipeline calibration (train/val) and evaluation (test)",
+   "source_url": "https://www.kaggle.com/datasets/mehantkammakomati/atm-anomaly-video-dataset-atmav",
+   "license": "CC BY-SA 4.0 (as declared on Kaggle by the uploader)",
+   "access": "public (Kaggle account for download)",
+   "redistribution": "The 65 videos were already committed to this repository before SentinelX (data/videos/). CC BY-SA 4.0 permits redistribution with attribution and share-alike; attribution is in data/videos/ATTRIBUTION.md. Caveat: the uploader states the clips were collected from YouTube, stock-footage and news sites, so upstream rights are not guaranteed by the Kaggle licence.",
+   "manifest_path": "data/manifests/atmav/manifest.json",
+   "acquire": "python -m ml.datasets.atmav --download",
+   "notes": "14 videos' containers over-report frame counts by 1\u2013131 frames; all labelled segments lie within decodable frames (see manifest validation_notes).",
+   "stats": {
+    "train": 32,
+    "val": 12,
+    "test": 21
+   }
+  },
+  {
+   "id": "scfd",
+   "name": "Surveillance Camera Fight Dataset",
+   "status": "acquired",
+   "label_type": "video_level",
+   "used_for": "evaluation of fighting / struggle rules (val = tuning, test = report)",
+   "source_url": "https://github.com/seymanurakti/fight-detection-surv-dataset",
+   "license": "MIT (repository LICENSE)",
+   "access": "public",
+   "redistribution": "Not committed \u2014 clips were cut from YouTube videos; fetched on demand by script",
+   "manifest_path": "data/manifests/scfd/manifest.json",
+   "acquire": "python -m ml.datasets.scfd",
+   "stats": {
+    "val": {
+     "fight": 61,
+     "noFight": 60
+    },
+    "test": {
+     "fight": 89,
+     "noFight": 90
+    }
+   }
+  },
+  {
+   "id": "ucf_crime",
+   "name": "UCF-Crime (Real-world Anomaly Detection in Surveillance Videos)",
+   "status": "documented",
+   "label_type": "video_level",
+   "source_url": "https://www.crcv.ucf.edu/projects/real-world/",
+   "license": "Official page: 'All data is only for research purposes, unless stated differently. Please make sure to reference the authors properly.'",
+   "access": "public download (UCF zip / Dropbox parts), ~128 h, 1,900 videos, 13 anomaly classes incl. Robbery, Burglary, Fighting, Vandalism",
+   "blocker": "Archive is on the order of 100 GB; this machine had 48 GB free disk. Labels are video-level (temporal only for test), so it would serve the pipeline evaluation, not detector training. Research-only terms.",
+   "reproducible_alternative": "python -m ml.datasets.ucf_crime --accept-research-terms --classes Robbery Fighting Vandalism (downloads only the temporal annotation file unless --videos is given)"
+  },
+  {
+   "id": "xd_violence",
+   "name": "XD-Violence",
+   "status": "documented",
+   "label_type": "video_level",
+   "source_url": "https://roc-ng.github.io/XD-Violence/",
+   "license": "No licence or usage terms stated on the official page",
+   "access": "Baidu Netdisk / AliyunDrive / OneDrive links (Baidu training link marked disabled)",
+   "blocker": "No stated licence; 217 h (4,754 videos); includes movie/game footage, weak labels."
+  },
+  {
+   "id": "rwf2000",
+   "name": "RWF-2000 (violence detection)",
+   "status": "documented",
+   "label_type": "video_level",
+   "source_url": "https://github.com/mchengny/RWF2000-Video-Database-for-Violence-Detection",
+   "license": "No modification/redistribution or commercial use without SMIIP Lab approval",
+   "access": "Official page: video files currently not available for privacy reasons",
+   "blocker": "Videos not publicly available; requires lab approval."
+  },
+  {
+   "id": "cuhk_avenue",
+   "name": "CUHK Avenue",
+   "status": "documented",
+   "label_type": "video_temporal",
+   "source_url": "https://www.cse.cuhk.edu.hk/leojia/projects/detectabnormal/dataset.html",
+   "license": "No licence stated on the official page; citation requested (Lu, Shi, Jia, ICCV 2013)",
+   "access": "public zip",
+   "blocker": "No licence stated; campus walkway (running, throwing objects) \u2014 weak relevance to ATM vestibules."
+  },
+  {
+   "id": "shanghaitech_campus",
+   "name": "ShanghaiTech Campus",
+   "status": "documented",
+   "label_type": "video_temporal",
+   "source_url": "https://svip-lab.github.io/dataset/campus_dataset.html",
+   "license": "Not verified on the official page (third-party docs claim BSD-2-Clause)",
+   "access": "public (manual download)",
+   "blocker": "Licence not verifiable from the official source; campus scenes (437 videos), not ATM."
+  },
+  {
+   "id": "ucsd_ped",
+   "name": "UCSD Anomaly Detection (Ped1/Ped2)",
+   "status": "documented",
+   "label_type": "video_temporal",
+   "source_url": "http://www.svcl.ucsd.edu/projects/anomaly/dataset.htm",
+   "license": "unknown",
+   "blocker": "Official site unreachable during research (connection refused); pedestrian walkways only."
+  },
+  {
+   "id": "ubnormal",
+   "name": "UBnormal",
+   "status": "documented",
+   "label_type": "video_temporal",
+   "source_url": "https://github.com/lilygeorgescu/UBnormal",
+   "license": "CC BY-NC-ND 4.0",
+   "blocker": "Synthetic (virtual scenes); NoDerivatives licence forbids distributing derived labels."
+  },
+  {
+   "id": "virat",
+   "name": "VIRAT Video Dataset (ground camera)",
+   "status": "documented",
+   "label_type": "video_temporal",
+   "source_url": "https://viratdata.org/",
+   "license": "Ground-camera data under the 'VIRAT Video Dataset Protection Agreement'",
+   "blocker": "Requires signing the protection agreement; outdoor parking-lot scenes."
+  },
+  {
+   "id": "od_weapon_detection",
+   "name": "OD-WeaponDetection (University of Granada, DaSCI)",
+   "status": "documented",
+   "label_type": "bbox",
+   "source_url": "https://github.com/ari-dasci/OD-WeaponDetection",
+   "license": "README states CC BY-SA 4.0; repository sidebar says CC BY 4.0 (inconsistent)",
+   "access": "Google Drive archive",
+   "blocker": "Licence statement is internally inconsistent and the archive is on Google Drive (no scripted, verifiable download). Candidate for v2 once the licence is confirmed with the authors; Open Images already provides Knife/Handgun/Rifle/Shotgun boxes under a clear licence."
+  }
+ ],
+ "models": [
+  {
+   "id": "yolov8n-coco",
+   "name": "YOLOv8n (COCO-80, Ultralytics pretrained) \u2014 original baseline",
+   "weights": "yolov8n.pt",
+   "sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+   "schema": "coco",
+   "source": "https://github.com/ultralytics/assets/releases (yolov8n.pt, AGPL-3.0)",
+   "weights_present": true,
+   "evaluation": {
+    "map50_shared": 0.444,
+    "map50_95_shared": 0.3153,
+    "map50_all_classes": 0.3454,
+    "map50_95_all_classes": 0.2453,
+    "latency": [
+     {
+      "device": "mps",
+      "images": 200,
+      "mean_ms": 29.44,
+      "p50_ms": 12.72,
+      "p95_ms": 181.15,
+      "fps": 34.0
+     },
+     {
+      "device": "cpu",
+      "images": 200,
+      "mean_ms": 30.91,
+      "p50_ms": 30.36,
+      "p95_ms": 38.1,
+      "fps": 32.4
+     }
+    ]
+   }
+  },
+  {
+   "id": "sentinelx-det-v1",
+   "name": "SentinelX detector v1 (YOLOv8n fine-tuned, 9 classes)",
+   "weights": "models/sentinelx-det-v1.pt",
+   "sha256": "f256db90266b2a04a80cf5f6bbeac2a9c4e7876b93b19939a196b4a9590f571d",
+   "schema": "sentinelx-classes-v1",
+   "base": "yolov8n-coco",
+   "dataset_id": "openimages_v7_sentinelx_v1",
+   "dataset_version": "6495ad20fbf022c7",
+   "train_config": "ml/configs/train_v1.yaml",
+   "training_report": "reports/training/sentinelx-det-v1/train_meta.json",
+   "evaluation_report": "reports/detector/report.json",
+   "default": true,
+   "weights_present": true,
+   "evaluation": {
+    "map50_shared": 0.6215,
+    "map50_95_shared": 0.4301,
+    "map50_all_classes": 0.6527,
+    "map50_95_all_classes": 0.4424,
+    "latency": [
+     {
+      "device": "mps",
+      "images": 200,
+      "mean_ms": 14.14,
+      "p50_ms": 11.78,
+      "p95_ms": 36.33,
+      "fps": 70.7
+     },
+     {
+      "device": "cpu",
+      "images": 200,
+      "mean_ms": 30.24,
+      "p50_ms": 29.35,
+      "p95_ms": 38.24,
+      "fps": 33.1
+     }
+    ]
+   }
+  }
+ ],
+ "reports": {
+  "detector": {
+   "generated_utc": "2026-10-14T10:04:53+00:00",
+   "dataset": {
+    "id": "openimages_v7_sentinelx_v1",
+    "version": "6495ad20fbf022c7",
+    "split": "test",
+    "images": 1437,
+    "gt_boxes": {
+     "person": 1723,
+     "knife": 121,
+     "firearm": 201,
+     "backpack": 61,
+     "handbag": 122,
+     "suitcase": 63,
+     "bottle": 614,
+     "helmet": 721,
+     "blunt_tool": 20
+    }
+   },
+   "protocol": {
+    "imgsz": 640,
+    "nms_iou": 0.7,
+    "ap_conf_floor": 0.001,
+    "operating_conf": 0.25,
+    "ap": "COCO 101-point, IoU 0.50:0.05:0.95",
+    "device": "mps"
+   },
+   "environment": {
+    "python": "3.13.5",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+   },
+   "models": {
+    "yolov8n-coco": {
+     "name": "YOLOv8n (COCO-80, Ultralytics pretrained) \u2014 original baseline",
+     "weights": "yolov8n.pt",
+     "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+     "schema": "coco",
+     "supported_classes": [
+      "person",
+      "knife",
+      "backpack",
+      "handbag",
+      "suitcase",
+      "bottle",
+      "blunt_tool"
+     ],
+     "map50_supported": 0.444,
+     "map50_95_supported": 0.3153,
+     "map50_all_classes": 0.3454,
+     "map50_95_all_classes": 0.2453,
+     "per_class": {
+      "person": {
+       "supported": true,
+       "gt_boxes": 1723,
+       "tp": 1312,
+       "fp": 390,
+       "precision": 0.7709,
+       "recall": 0.7615,
+       "f1": 0.7661,
+       "fppi": 0.2714,
+       "image_fpr": 0.0533,
+       "ap50": 0.794,
+       "ap50_95": 0.6047
+      },
+      "knife": {
+       "supported": true,
+       "gt_boxes": 121,
+       "tp": 40,
+       "fp": 9,
+       "precision": 0.8163,
+       "recall": 0.3306,
+       "f1": 0.4706,
+       "fppi": 0.0063,
+       "image_fpr": 0.0022,
+       "ap50": 0.4801,
+       "ap50_95": 0.3726
+      },
+      "firearm": {
+       "supported": false,
+       "gt_boxes": 201,
+       "tp": 0,
+       "fp": 0,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null,
+       "fppi": 0.0,
+       "image_fpr": 0.0,
+       "ap50": null,
+       "ap50_95": null
+      },
+      "backpack": {
+       "supported": true,
+       "gt_boxes": 61,
+       "tp": 17,
+       "fp": 22,
+       "precision": 0.4359,
+       "recall": 0.2787,
+       "f1": 0.34,
+       "fppi": 0.0153,
+       "image_fpr": 0.0101,
+       "ap50": 0.2084,
+       "ap50_95": 0.1011
+      },
+      "handbag": {
+       "supported": true,
+       "gt_boxes": 122,
+       "tp": 20,
+       "fp": 30,
+       "precision": 0.4,
+       "recall": 0.1639,
+       "f1": 0.2326,
+       "fppi": 0.0209,
+       "image_fpr": 0.0121,
+       "ap50": 0.1568,
+       "ap50_95": 0.1198
+      },
+      "suitcase": {
+       "supported": true,
+       "gt_boxes": 63,
+       "tp": 46,
+       "fp": 119,
+       "precision": 0.2788,
+       "recall": 0.7302,
+       "f1": 0.4035,
+       "fppi": 0.0828,
+       "image_fpr": 0.0522,
+       "ap50": 0.5501,
+       "ap50_95": 0.3713
+      },
+      "bottle": {
+       "supported": true,
+       "gt_boxes": 614,
+       "tp": 371,
+       "fp": 136,
+       "precision": 0.7318,
+       "recall": 0.6042,
+       "f1": 0.6619,
+       "fppi": 0.0946,
+       "image_fpr": 0.016,
+       "ap50": 0.6647,
+       "ap50_95": 0.505
+      },
+      "helmet": {
+       "supported": false,
+       "gt_boxes": 721,
+       "tp": 0,
+       "fp": 0,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null,
+       "fppi": 0.0,
+       "image_fpr": 0.0,
+       "ap50": null,
+       "ap50_95": null
+      },
+      "blunt_tool": {
+       "supported": true,
+       "gt_boxes": 20,
+       "tp": 13,
+       "fp": 37,
+       "precision": 0.26,
+       "recall": 0.65,
+       "f1": 0.3714,
+       "fppi": 0.0257,
+       "image_fpr": 0.0183,
+       "ap50": 0.2542,
+       "ap50_95": 0.1327
+      }
+     },
+     "confusion_matrix": {
+      "labels": [
+       "person",
+       "knife",
+       "firearm",
+       "backpack",
+       "handbag",
+       "suitcase",
+       "bottle",
+       "helmet",
+       "blunt_tool",
+       "background"
+      ],
+      "rows": "predicted",
+      "cols": "true",
+      "matrix": [
+       [
+        1311,
+        0,
+        3,
+        2,
+        4,
+        1,
+        2,
+        3,
+        0,
+        376
+       ],
+       [
+        0,
+        41,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        15,
+        2,
+        1,
+        0,
+        3,
+        0,
+        18
+       ],
+       [
+        0,
+        0,
+        0,
+        5,
+        19,
+        1,
+        0,
+        0,
+        0,
+        25
+       ],
+       [
+        1,
+        1,
+        8,
+        21,
+        27,
+        43,
+        1,
+        5,
+        0,
+        58
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        371,
+        0,
+        0,
+        136
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       [
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        13,
+        33
+       ],
+       [
+        411,
+        79,
+        186,
+        18,
+        70,
+        17,
+        240,
+        710,
+        7,
+        0
+       ]
+      ]
+     },
+     "latency": [
+      {
+       "device": "mps",
+       "images": 200,
+       "mean_ms": 29.44,
+       "p50_ms": 12.72,
+       "p95_ms": 181.15,
+       "fps": 34.0
+      },
+      {
+       "device": "cpu",
+       "images": 200,
+       "mean_ms": 30.91,
+       "p50_ms": 30.36,
+       "p95_ms": 38.1,
+       "fps": 32.4
+      }
+     ],
+     "metric_check": {
+      "reference": "pycocotools COCOeval (maxDets 300)",
+      "max_abs_diff_ap50": 0.0,
+      "max_abs_diff_ap50_95": 0.0
+     },
+     "map50_shared": 0.444,
+     "map50_95_shared": 0.3153
+    },
+    "sentinelx-det-v1": {
+     "name": "SentinelX detector v1 (YOLOv8n fine-tuned, 9 classes)",
+     "weights": "models/sentinelx-det-v1.pt",
+     "weights_sha256": "f256db90266b2a04a80cf5f6bbeac2a9c4e7876b93b19939a196b4a9590f571d",
+     "schema": "sentinelx-classes-v1",
+     "supported_classes": [
+      "person",
+      "knife",
+      "firearm",
+      "backpack",
+      "handbag",
+      "suitcase",
+      "bottle",
+      "helmet",
+      "blunt_tool"
+     ],
+     "map50_supported": 0.6527,
+     "map50_95_supported": 0.4424,
+     "map50_all_classes": 0.6527,
+     "map50_95_all_classes": 0.4424,
+     "per_class": {
+      "person": {
+       "supported": true,
+       "gt_boxes": 1723,
+       "tp": 1123,
+       "fp": 275,
+       "precision": 0.8033,
+       "recall": 0.6518,
+       "f1": 0.7196,
+       "fppi": 0.1914,
+       "image_fpr": 0.0329,
+       "ap50": 0.7209,
+       "ap50_95": 0.4881
+      },
+      "knife": {
+       "supported": true,
+       "gt_boxes": 121,
+       "tp": 88,
+       "fp": 50,
+       "precision": 0.6377,
+       "recall": 0.7273,
+       "f1": 0.6795,
+       "fppi": 0.0348,
+       "image_fpr": 0.0185,
+       "ap50": 0.7177,
+       "ap50_95": 0.4979
+      },
+      "firearm": {
+       "supported": true,
+       "gt_boxes": 201,
+       "tp": 154,
+       "fp": 105,
+       "precision": 0.5946,
+       "recall": 0.7662,
+       "f1": 0.6696,
+       "fppi": 0.0731,
+       "image_fpr": 0.0327,
+       "ap50": 0.756,
+       "ap50_95": 0.4921
+      },
+      "backpack": {
+       "supported": true,
+       "gt_boxes": 61,
+       "tp": 40,
+       "fp": 64,
+       "precision": 0.3846,
+       "recall": 0.6557,
+       "f1": 0.4848,
+       "fppi": 0.0445,
+       "image_fpr": 0.033,
+       "ap50": 0.5419,
+       "ap50_95": 0.3646
+      },
+      "handbag": {
+       "supported": true,
+       "gt_boxes": 122,
+       "tp": 99,
+       "fp": 102,
+       "precision": 0.4925,
+       "recall": 0.8115,
+       "f1": 0.613,
+       "fppi": 0.071,
+       "image_fpr": 0.0603,
+       "ap50": 0.7761,
+       "ap50_95": 0.6557
+      },
+      "suitcase": {
+       "supported": true,
+       "gt_boxes": 63,
+       "tp": 36,
+       "fp": 79,
+       "precision": 0.313,
+       "recall": 0.5714,
+       "f1": 0.4045,
+       "fppi": 0.055,
+       "image_fpr": 0.0365,
+       "ap50": 0.4136,
+       "ap50_95": 0.2255
+      },
+      "bottle": {
+       "supported": true,
+       "gt_boxes": 614,
+       "tp": 446,
+       "fp": 185,
+       "precision": 0.7068,
+       "recall": 0.7264,
+       "f1": 0.7165,
+       "fppi": 0.1287,
+       "image_fpr": 0.0284,
+       "ap50": 0.7543,
+       "ap50_95": 0.5887
+      },
+      "helmet": {
+       "supported": true,
+       "gt_boxes": 721,
+       "tp": 517,
+       "fp": 204,
+       "precision": 0.7171,
+       "recall": 0.7171,
+       "f1": 0.7171,
+       "fppi": 0.142,
+       "image_fpr": 0.0517,
+       "ap50": 0.7675,
+       "ap50_95": 0.4787
+      },
+      "blunt_tool": {
+       "supported": true,
+       "gt_boxes": 20,
+       "tp": 11,
+       "fp": 42,
+       "precision": 0.2075,
+       "recall": 0.55,
+       "f1": 0.3014,
+       "fppi": 0.0292,
+       "image_fpr": 0.0211,
+       "ap50": 0.4258,
+       "ap50_95": 0.1906
+      }
+     },
+     "confusion_matrix": {
+      "labels": [
+       "person",
+       "knife",
+       "firearm",
+       "backpack",
+       "handbag",
+       "suitcase",
+       "bottle",
+       "helmet",
+       "blunt_tool",
+       "background"
+      ],
+      "rows": "predicted",
+      "cols": "true",
+      "matrix": [
+       [
+        1116,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        7,
+        0,
+        274
+       ],
+       [
+        1,
+        87,
+        2,
+        0,
+        1,
+        0,
+        3,
+        0,
+        0,
+        44
+       ],
+       [
+        3,
+        5,
+        151,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        97
+       ],
+       [
+        6,
+        0,
+        1,
+        31,
+        2,
+        6,
+        0,
+        5,
+        0,
+        53
+       ],
+       [
+        10,
+        1,
+        1,
+        7,
+        96,
+        5,
+        5,
+        5,
+        0,
+        71
+       ],
+       [
+        1,
+        2,
+        0,
+        6,
+        10,
+        33,
+        0,
+        7,
+        0,
+        56
+       ],
+       [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        443,
+        7,
+        0,
+        180
+       ],
+       [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        506,
+        0,
+        211
+       ],
+       [
+        1,
+        2,
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        11,
+        34
+       ],
+       [
+        583,
+        24,
+        42,
+        16,
+        12,
+        19,
+        157,
+        184,
+        9,
+        0
+       ]
+      ]
+     },
+     "latency": [
+      {
+       "device": "mps",
+       "images": 200,
+       "mean_ms": 14.14,
+       "p50_ms": 11.78,
+       "p95_ms": 36.33,
+       "fps": 70.7
+      },
+      {
+       "device": "cpu",
+       "images": 200,
+       "mean_ms": 30.24,
+       "p50_ms": 29.35,
+       "p95_ms": 38.24,
+       "fps": 33.1
+      }
+     ],
+     "metric_check": {
+      "reference": "pycocotools COCOeval (maxDets 300)",
+      "max_abs_diff_ap50": 0.0,
+      "max_abs_diff_ap50_95": 0.0
+     },
+     "map50_shared": 0.6215,
+     "map50_95_shared": 0.4301
+    }
+   },
+   "shared_classes": [
+    "person",
+    "knife",
+    "backpack",
+    "handbag",
+    "suitcase",
+    "bottle",
+    "blunt_tool"
+   ],
+   "bootstrap": {
+    "n_boot": 300,
+    "shared_classes": [
+     "person",
+     "knife",
+     "backpack",
+     "handbag",
+     "suitcase",
+     "bottle",
+     "blunt_tool"
+    ],
+    "models": {
+     "yolov8n-coco": {
+      "own": {
+       "ci95": [
+        0.4088,
+        0.4918
+       ]
+      },
+      "shared": {
+       "ci95": [
+        0.4088,
+        0.4918
+       ]
+      }
+     },
+     "sentinelx-det-v1": {
+      "own": {
+       "ci95": [
+        0.6154,
+        0.6954
+       ]
+      },
+      "shared": {
+       "ci95": [
+        0.5772,
+        0.6718
+       ]
+      }
+     }
+    },
+    "difference_shared_map50": {
+     "models": "sentinelx-det-v1 - yolov8n-coco",
+     "mean": 0.1718,
+     "ci95": [
+      0.1265,
+      0.2211
+     ],
+     "p_le_0": 0.0
+    }
+   }
+  },
+  "pipeline": {
+   "generated_utc": "2026-10-14T10:14:00+00:00",
+   "protocol": {
+    "incident_threshold": 50,
+    "high_threshold": 75,
+    "temporal_heads": "trained on ATMA-V train split, selected on val (ml/train_temporal.py)",
+    "v2_infer_fps": 10.0,
+    "v2_engine": "rules-v2",
+    "device": "cpu",
+    "zones": "default ATM zone (5%-95% of frame) for every video \u2014 no per-video tuning"
+   },
+   "variants": {
+    "v0": {
+     "detector": "yolov8n-coco (v0 settings)",
+     "atmav": {
+      "test": {
+       "split": "test",
+       "videos": 21,
+       "anomalous_videos": 13,
+       "frames": 26163,
+       "anomalous_frames": 16627,
+       "frame_auc": 0.4988,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.6826,
+        "recall": 0.2841,
+        "f1": 0.4012,
+        "fpr": 0.2303,
+        "tp": 4723,
+        "fp": 2196,
+        "fn": 11904,
+        "tn": 7340
+       },
+       "at_high": {
+        "threshold": 75,
+        "precision": 0.5564,
+        "recall": 0.0279,
+        "f1": 0.0531,
+        "fpr": 0.0388,
+        "tp": 464,
+        "fp": 370,
+        "fn": 16163,
+        "tn": 9166
+       },
+       "video_detection_rate": 0.6923,
+       "videos_with_false_alarm": 0.2857,
+       "false_alarms_per_min_normal": {
+        "incident": 3.616,
+        "high": 1.5722,
+        "events_incident": 23,
+        "normal_minutes": 6.36
+       },
+       "rule_activations": {},
+       "per_video": [
+        {
+         "video": "3.mp4",
+         "anomalous": true,
+         "frames": 737,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "10.mp4",
+         "anomalous": true,
+         "frames": 1796,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": 0.9472
+        },
+        {
+         "video": "12.mp4",
+         "anomalous": false,
+         "frames": 910,
+         "max_score": 60,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "15.mp4",
+         "anomalous": false,
+         "frames": 446,
+         "max_score": 47,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "18.mp4",
+         "anomalous": true,
+         "frames": 378,
+         "max_score": 35,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": 0.602
+        },
+        {
+         "video": "22.mp4",
+         "anomalous": false,
+         "frames": 1030,
+         "max_score": 90,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "23.mp4",
+         "anomalous": false,
+         "frames": 578,
+         "max_score": 65,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36a.mp4",
+         "anomalous": false,
+         "frames": 319,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36b.mp4",
+         "anomalous": true,
+         "frames": 1884,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36c.mp4",
+         "anomalous": true,
+         "frames": 544,
+         "max_score": 65,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "47.mp4",
+         "anomalous": false,
+         "frames": 146,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "50.mp4",
+         "anomalous": false,
+         "frames": 318,
+         "max_score": 15,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "53.mp4",
+         "anomalous": true,
+         "frames": 322,
+         "max_score": 35,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": 0.7834
+        },
+        {
+         "video": "66.mp4",
+         "anomalous": false,
+         "frames": 628,
+         "max_score": 60,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "69.mp4",
+         "anomalous": true,
+         "frames": 2147,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": 0.9533
+        },
+        {
+         "video": "80.mp4",
+         "anomalous": true,
+         "frames": 1811,
+         "max_score": 90,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82a.mp4",
+         "anomalous": true,
+         "frames": 389,
+         "max_score": 35,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82b.mp4",
+         "anomalous": true,
+         "frames": 76,
+         "max_score": 35,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "85.mp4",
+         "anomalous": true,
+         "frames": 7558,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.6784
+        },
+        {
+         "video": "88.mp4",
+         "anomalous": true,
+         "frames": 1173,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "93.mp4",
+         "anomalous": true,
+         "frames": 2973,
+         "max_score": 90,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.114
+        }
+       ]
+      }
+     },
+     "scfd": {
+      "test": {
+       "split": "test",
+       "clips": 179,
+       "fight": 89,
+       "noFight": 90,
+       "clip_auc_peak_score": 0.6386,
+       "clip_auc_mean_score": 0.62,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.75,
+        "recall": 0.0674,
+        "f1": 0.1237,
+        "fpr": 0.0222,
+        "tp": 6,
+        "fp": 2,
+        "fn": 83,
+        "tn": 88
+       },
+       "rule_fired_share": {
+        "fight": {},
+        "noFight": {}
+       }
+      }
+     },
+     "wall_time_s": 883
+    },
+    "v2-coco": {
+     "detector": "yolov8n-coco",
+     "atmav": {
+      "test": {
+       "split": "test",
+       "videos": 21,
+       "anomalous_videos": 13,
+       "frames": 26163,
+       "anomalous_frames": 16627,
+       "frame_auc": 0.4074,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.5557,
+        "recall": 0.1293,
+        "f1": 0.2098,
+        "fpr": 0.1803,
+        "tp": 2150,
+        "fp": 1719,
+        "fn": 14477,
+        "tn": 7817
+       },
+       "at_high": {
+        "threshold": 75,
+        "precision": 1.0,
+        "recall": 0.0043,
+        "f1": 0.0086,
+        "fpr": 0.0,
+        "tp": 72,
+        "fp": 0,
+        "fn": 16555,
+        "tn": 9536
+       },
+       "video_detection_rate": 0.4615,
+       "videos_with_false_alarm": 0.3333,
+       "false_alarms_per_min_normal": {
+        "incident": 2.8299,
+        "high": 0.0,
+        "events_incident": 18,
+        "normal_minutes": 6.36
+       },
+       "rule_activations": {
+        "multiple_persons": 1512,
+        "close_proximity": 739,
+        "loitering": 809,
+        "rapid_motion": 95,
+        "vandalism": 697,
+        "weapon": 469
+       },
+       "per_video": [
+        {
+         "video": "3.mp4",
+         "anomalous": true,
+         "frames": 737,
+         "max_score": 24,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "10.mp4",
+         "anomalous": true,
+         "frames": 1796,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": 0.9503
+        },
+        {
+         "video": "12.mp4",
+         "anomalous": false,
+         "frames": 910,
+         "max_score": 65,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "15.mp4",
+         "anomalous": false,
+         "frames": 446,
+         "max_score": 34,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "18.mp4",
+         "anomalous": true,
+         "frames": 378,
+         "max_score": 35,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": 0.7074
+        },
+        {
+         "video": "22.mp4",
+         "anomalous": false,
+         "frames": 1030,
+         "max_score": 70,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "23.mp4",
+         "anomalous": false,
+         "frames": 578,
+         "max_score": 70,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36a.mp4",
+         "anomalous": false,
+         "frames": 319,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36b.mp4",
+         "anomalous": true,
+         "frames": 1884,
+         "max_score": 49,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36c.mp4",
+         "anomalous": true,
+         "frames": 544,
+         "max_score": 65,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "47.mp4",
+         "anomalous": false,
+         "frames": 146,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "50.mp4",
+         "anomalous": false,
+         "frames": 318,
+         "max_score": 0,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "53.mp4",
+         "anomalous": true,
+         "frames": 322,
+         "max_score": 55,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.7974
+        },
+        {
+         "video": "66.mp4",
+         "anomalous": false,
+         "frames": 628,
+         "max_score": 55,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "69.mp4",
+         "anomalous": true,
+         "frames": 2147,
+         "max_score": 60,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": 0.9675
+        },
+        {
+         "video": "80.mp4",
+         "anomalous": true,
+         "frames": 1811,
+         "max_score": 30,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82a.mp4",
+         "anomalous": true,
+         "frames": 389,
+         "max_score": 30,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82b.mp4",
+         "anomalous": true,
+         "frames": 76,
+         "max_score": 0,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "85.mp4",
+         "anomalous": true,
+         "frames": 7558,
+         "max_score": 88,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.5845
+        },
+        {
+         "video": "88.mp4",
+         "anomalous": true,
+         "frames": 1173,
+         "max_score": 0,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "93.mp4",
+         "anomalous": true,
+         "frames": 2973,
+         "max_score": 65,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.1101
+        }
+       ]
+      }
+     },
+     "scfd": {
+      "test": {
+       "split": "test",
+       "clips": 179,
+       "fight": 89,
+       "noFight": 90,
+       "clip_auc_peak_score": 0.6359,
+       "clip_auc_mean_score": 0.6331,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 1.0,
+        "recall": 0.0112,
+        "f1": 0.0222,
+        "fpr": 0.0,
+        "tp": 1,
+        "fp": 0,
+        "fn": 88,
+        "tn": 90
+       },
+       "rule_fired_share": {
+        "fight": {
+         "close_proximity": 0.7303,
+         "multiple_persons": 0.8989,
+         "rapid_motion": 0.0112,
+         "threat_object": 0.0112
+        },
+        "noFight": {
+         "close_proximity": 0.4889,
+         "multiple_persons": 0.6333,
+         "rapid_motion": 0.0111
+        }
+       }
+      }
+     },
+     "wall_time_s": 19
+    },
+    "v2-coco+temporal": {
+     "detector": "yolov8n-coco",
+     "atmav": {
+      "test": {
+       "split": "test",
+       "videos": 21,
+       "anomalous_videos": 13,
+       "frames": 26163,
+       "anomalous_frames": 16627,
+       "frame_auc": 0.6276,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.7019,
+        "recall": 0.9119,
+        "f1": 0.7932,
+        "fpr": 0.6753,
+        "tp": 15162,
+        "fp": 6440,
+        "fn": 1465,
+        "tn": 3096
+       },
+       "at_high": {
+        "threshold": 75,
+        "precision": 0.7511,
+        "recall": 0.3533,
+        "f1": 0.4805,
+        "fpr": 0.2042,
+        "tp": 5874,
+        "fp": 1947,
+        "fn": 10753,
+        "tn": 7589
+       },
+       "video_detection_rate": 1.0,
+       "videos_with_false_alarm": 0.619,
+       "false_alarms_per_min_normal": {
+        "incident": 2.9871,
+        "high": 1.8866,
+        "events_incident": 19,
+        "normal_minutes": 6.36
+       },
+       "rule_activations": {
+        "learned_anomaly": 5419,
+        "multiple_persons": 1512,
+        "close_proximity": 739,
+        "loitering": 809,
+        "rapid_motion": 95,
+        "vandalism": 697,
+        "weapon": 469
+       },
+       "per_video": [
+        {
+         "video": "3.mp4",
+         "anomalous": true,
+         "frames": 737,
+         "max_score": 72,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "10.mp4",
+         "anomalous": true,
+         "frames": 1796,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.9527
+        },
+        {
+         "video": "12.mp4",
+         "anomalous": false,
+         "frames": 910,
+         "max_score": 65,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "15.mp4",
+         "anomalous": false,
+         "frames": 446,
+         "max_score": 62,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "18.mp4",
+         "anomalous": true,
+         "frames": 378,
+         "max_score": 70,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.8127
+        },
+        {
+         "video": "22.mp4",
+         "anomalous": false,
+         "frames": 1030,
+         "max_score": 100,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "23.mp4",
+         "anomalous": false,
+         "frames": 578,
+         "max_score": 70,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36a.mp4",
+         "anomalous": false,
+         "frames": 319,
+         "max_score": 70,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36b.mp4",
+         "anomalous": true,
+         "frames": 1884,
+         "max_score": 99,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36c.mp4",
+         "anomalous": true,
+         "frames": 544,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "47.mp4",
+         "anomalous": false,
+         "frames": 146,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "50.mp4",
+         "anomalous": false,
+         "frames": 318,
+         "max_score": 50,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "53.mp4",
+         "anomalous": true,
+         "frames": 322,
+         "max_score": 79,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.5875
+        },
+        {
+         "video": "66.mp4",
+         "anomalous": false,
+         "frames": 628,
+         "max_score": 55,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "69.mp4",
+         "anomalous": true,
+         "frames": 2147,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.9532
+        },
+        {
+         "video": "80.mp4",
+         "anomalous": true,
+         "frames": 1811,
+         "max_score": 74,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82a.mp4",
+         "anomalous": true,
+         "frames": 389,
+         "max_score": 80,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82b.mp4",
+         "anomalous": true,
+         "frames": 76,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "85.mp4",
+         "anomalous": true,
+         "frames": 7558,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.5728
+        },
+        {
+         "video": "88.mp4",
+         "anomalous": true,
+         "frames": 1173,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "93.mp4",
+         "anomalous": true,
+         "frames": 2973,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.134
+        }
+       ]
+      }
+     },
+     "scfd": {
+      "test": {
+       "split": "test",
+       "clips": 179,
+       "fight": 89,
+       "noFight": 90,
+       "clip_auc_peak_score": 0.7169,
+       "clip_auc_mean_score": 0.7219,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.594,
+        "recall": 0.8876,
+        "f1": 0.7117,
+        "fpr": 0.6,
+        "tp": 79,
+        "fp": 54,
+        "fn": 10,
+        "tn": 36
+       },
+       "rule_fired_share": {
+        "fight": {
+         "close_proximity": 0.7303,
+         "learned_anomaly": 0.9775,
+         "multiple_persons": 0.8989,
+         "rapid_motion": 0.0112,
+         "threat_object": 0.0112
+        },
+        "noFight": {
+         "close_proximity": 0.4889,
+         "learned_anomaly": 0.7444,
+         "multiple_persons": 0.6333,
+         "rapid_motion": 0.0111
+        }
+       }
+      }
+     },
+     "wall_time_s": 1
+    },
+    "v2-sentinelx": {
+     "detector": "sentinelx-det-v1",
+     "atmav": {
+      "test": {
+       "split": "test",
+       "videos": 21,
+       "anomalous_videos": 13,
+       "frames": 26163,
+       "anomalous_frames": 16627,
+       "frame_auc": 0.4394,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.5653,
+        "recall": 0.1231,
+        "f1": 0.2022,
+        "fpr": 0.1651,
+        "tp": 2047,
+        "fp": 1574,
+        "fn": 14580,
+        "tn": 7962
+       },
+       "at_high": {
+        "threshold": 75,
+        "precision": 0.532,
+        "recall": 0.0345,
+        "f1": 0.0647,
+        "fpr": 0.0529,
+        "tp": 573,
+        "fp": 504,
+        "fn": 16054,
+        "tn": 9032
+       },
+       "video_detection_rate": 0.6154,
+       "videos_with_false_alarm": 0.2381,
+       "false_alarms_per_min_normal": {
+        "incident": 1.1005,
+        "high": 0.4717,
+        "events_incident": 7,
+        "normal_minutes": 6.36
+       },
+       "rule_activations": {
+        "threat_object": 821,
+        "weapon": 464,
+        "multiple_persons": 503,
+        "close_proximity": 301,
+        "loitering": 300,
+        "face_concealment": 104,
+        "vandalism": 126,
+        "rapid_motion": 11,
+        "firearm": 302,
+        "blunt_tool": 85
+       },
+       "per_video": [
+        {
+         "video": "3.mp4",
+         "anomalous": true,
+         "frames": 737,
+         "max_score": 25,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "10.mp4",
+         "anomalous": true,
+         "frames": 1796,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": 0.9218
+        },
+        {
+         "video": "12.mp4",
+         "anomalous": false,
+         "frames": 910,
+         "max_score": 45,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "15.mp4",
+         "anomalous": false,
+         "frames": 446,
+         "max_score": 12,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "18.mp4",
+         "anomalous": true,
+         "frames": 378,
+         "max_score": 32,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": 0.8558
+        },
+        {
+         "video": "22.mp4",
+         "anomalous": false,
+         "frames": 1030,
+         "max_score": 24,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "23.mp4",
+         "anomalous": false,
+         "frames": 578,
+         "max_score": 50,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36a.mp4",
+         "anomalous": false,
+         "frames": 319,
+         "max_score": 20,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36b.mp4",
+         "anomalous": true,
+         "frames": 1884,
+         "max_score": 12,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36c.mp4",
+         "anomalous": true,
+         "frames": 544,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "47.mp4",
+         "anomalous": false,
+         "frames": 146,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "50.mp4",
+         "anomalous": false,
+         "frames": 318,
+         "max_score": 0,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "53.mp4",
+         "anomalous": true,
+         "frames": 322,
+         "max_score": 55,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.9551
+        },
+        {
+         "video": "66.mp4",
+         "anomalous": false,
+         "frames": 628,
+         "max_score": 47,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "69.mp4",
+         "anomalous": true,
+         "frames": 2147,
+         "max_score": 66,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.6755
+        },
+        {
+         "video": "80.mp4",
+         "anomalous": true,
+         "frames": 1811,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82a.mp4",
+         "anomalous": true,
+         "frames": 389,
+         "max_score": 37,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82b.mp4",
+         "anomalous": true,
+         "frames": 76,
+         "max_score": 0,
+         "alarm_in_anomaly": false,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "85.mp4",
+         "anomalous": true,
+         "frames": 7558,
+         "max_score": 90,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.4331
+        },
+        {
+         "video": "88.mp4",
+         "anomalous": true,
+         "frames": 1173,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "93.mp4",
+         "anomalous": true,
+         "frames": 2973,
+         "max_score": 80,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.2927
+        }
+       ]
+      }
+     },
+     "scfd": {
+      "test": {
+       "split": "test",
+       "clips": 179,
+       "fight": 89,
+       "noFight": 90,
+       "clip_auc_peak_score": 0.6031,
+       "clip_auc_mean_score": 0.5833,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.8571,
+        "recall": 0.0674,
+        "f1": 0.125,
+        "fpr": 0.0111,
+        "tp": 6,
+        "fp": 1,
+        "fn": 83,
+        "tn": 89
+       },
+       "rule_fired_share": {
+        "fight": {
+         "close_proximity": 0.4045,
+         "firearm": 0.0449,
+         "multiple_persons": 0.5281,
+         "threat_object": 0.1461
+        },
+        "noFight": {
+         "close_proximity": 0.3,
+         "face_concealment": 0.0222,
+         "firearm": 0.0222,
+         "multiple_persons": 0.4,
+         "threat_object": 0.0556
+        }
+       }
+      }
+     },
+     "wall_time_s": 0
+    },
+    "v2-sentinelx+temporal": {
+     "detector": "sentinelx-det-v1",
+     "atmav": {
+      "test": {
+       "split": "test",
+       "videos": 21,
+       "anomalous_videos": 13,
+       "frames": 26163,
+       "anomalous_frames": 16627,
+       "frame_auc": 0.6423,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.7309,
+        "recall": 0.9438,
+        "f1": 0.8238,
+        "fpr": 0.6058,
+        "tp": 15693,
+        "fp": 5777,
+        "fn": 934,
+        "tn": 3759
+       },
+       "at_high": {
+        "threshold": 75,
+        "precision": 0.701,
+        "recall": 0.342,
+        "f1": 0.4597,
+        "fpr": 0.2544,
+        "tp": 5687,
+        "fp": 2426,
+        "fn": 10940,
+        "tn": 7110
+       },
+       "video_detection_rate": 1.0,
+       "videos_with_false_alarm": 0.5238,
+       "false_alarms_per_min_normal": {
+        "incident": 1.8866,
+        "high": 1.7294,
+        "events_incident": 12,
+        "normal_minutes": 6.36
+       },
+       "rule_activations": {
+        "learned_anomaly": 5935,
+        "threat_object": 821,
+        "weapon": 464,
+        "multiple_persons": 503,
+        "close_proximity": 301,
+        "loitering": 300,
+        "face_concealment": 104,
+        "vandalism": 126,
+        "rapid_motion": 11,
+        "firearm": 302,
+        "blunt_tool": 85
+       },
+       "per_video": [
+        {
+         "video": "3.mp4",
+         "anomalous": true,
+         "frames": 737,
+         "max_score": 75,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "10.mp4",
+         "anomalous": true,
+         "frames": 1796,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.8858
+        },
+        {
+         "video": "12.mp4",
+         "anomalous": false,
+         "frames": 910,
+         "max_score": 50,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "15.mp4",
+         "anomalous": false,
+         "frames": 446,
+         "max_score": 12,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "18.mp4",
+         "anomalous": true,
+         "frames": 378,
+         "max_score": 62,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.9361
+        },
+        {
+         "video": "22.mp4",
+         "anomalous": false,
+         "frames": 1030,
+         "max_score": 50,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "23.mp4",
+         "anomalous": false,
+         "frames": 578,
+         "max_score": 57,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36a.mp4",
+         "anomalous": false,
+         "frames": 319,
+         "max_score": 62,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "36b.mp4",
+         "anomalous": true,
+         "frames": 1884,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "36c.mp4",
+         "anomalous": true,
+         "frames": 544,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "47.mp4",
+         "anomalous": false,
+         "frames": 146,
+         "max_score": 35,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "50.mp4",
+         "anomalous": false,
+         "frames": 318,
+         "max_score": 50,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": true,
+         "frame_auc": null
+        },
+        {
+         "video": "53.mp4",
+         "anomalous": true,
+         "frames": 322,
+         "max_score": 55,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.9551
+        },
+        {
+         "video": "66.mp4",
+         "anomalous": false,
+         "frames": 628,
+         "max_score": 47,
+         "alarm_in_anomaly": null,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "69.mp4",
+         "anomalous": true,
+         "frames": 2147,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.5986
+        },
+        {
+         "video": "80.mp4",
+         "anomalous": true,
+         "frames": 1811,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82a.mp4",
+         "anomalous": true,
+         "frames": 389,
+         "max_score": 87,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "82b.mp4",
+         "anomalous": true,
+         "frames": 76,
+         "max_score": 50,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "85.mp4",
+         "anomalous": true,
+         "frames": 7558,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.4167
+        },
+        {
+         "video": "88.mp4",
+         "anomalous": true,
+         "frames": 1173,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": false,
+         "frame_auc": null
+        },
+        {
+         "video": "93.mp4",
+         "anomalous": true,
+         "frames": 2973,
+         "max_score": 100,
+         "alarm_in_anomaly": true,
+         "alarm_in_normal": true,
+         "frame_auc": 0.2008
+        }
+       ]
+      }
+     },
+     "scfd": {
+      "test": {
+       "split": "test",
+       "clips": 179,
+       "fight": 89,
+       "noFight": 90,
+       "clip_auc_peak_score": 0.6512,
+       "clip_auc_mean_score": 0.7112,
+       "at_incident_threshold": {
+        "threshold": 50,
+        "precision": 0.5473,
+        "recall": 0.9101,
+        "f1": 0.6835,
+        "fpr": 0.7444,
+        "tp": 81,
+        "fp": 67,
+        "fn": 8,
+        "tn": 23
+       },
+       "rule_fired_share": {
+        "fight": {
+         "close_proximity": 0.4045,
+         "firearm": 0.0449,
+         "learned_anomaly": 0.9888,
+         "multiple_persons": 0.5281,
+         "threat_object": 0.1461
+        },
+        "noFight": {
+         "close_proximity": 0.3,
+         "face_concealment": 0.0222,
+         "firearm": 0.0222,
+         "learned_anomaly": 0.8444,
+         "multiple_persons": 0.4,
+         "threat_object": 0.0556
+        }
+       }
+      }
+     },
+     "wall_time_s": 0
+    }
+   }
+  },
+  "training": {
+   "run_id": "sentinelx-det-v1",
+   "finished_utc": "2026-10-14T10:03:00+00:00",
+   "git_commit": "f5b93ae03dc9a88eb312bf21b2079e89ec80e04f",
+   "config": {
+    "run_id": "sentinelx-det-v1",
+    "base_weights": "yolov8n.pt",
+    "dataset": "openimages_v7_sentinelx_v1",
+    "data_yaml": "datasets/processed/openimages_v7_sentinelx_v1/data.yaml",
+    "train": {
+     "epochs": 40,
+     "imgsz": 640,
+     "batch": 32,
+     "patience": 10,
+     "optimizer": "AdamW",
+     "lr0": 0.002,
+     "cos_lr": true,
+     "warmup_epochs": 2,
+     "close_mosaic": 5,
+     "seed": 0,
+     "deterministic": true,
+     "workers": 8,
+     "cache": false,
+     "amp": true,
+     "plots": true
+    }
+   },
+   "effective_train_args": {
+    "epochs": 40,
+    "imgsz": 640,
+    "batch": 32,
+    "patience": 10,
+    "optimizer": "AdamW",
+    "lr0": 0.002,
+    "cos_lr": true,
+    "warmup_epochs": 2,
+    "close_mosaic": 5,
+    "seed": 0,
+    "deterministic": true,
+    "workers": 8,
+    "cache": false,
+    "amp": true,
+    "plots": true,
+    "device": "mps"
+   },
+   "dataset": {
+    "id": "openimages_v7_sentinelx_v1",
+    "version": "6495ad20fbf022c7",
+    "splits": {
+     "train": 6178,
+     "val": 906,
+     "test": 1437
+    }
+   },
+   "base_weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+   "weights": "models/sentinelx-det-v1.pt",
+   "weights_sha256": "f256db90266b2a04a80cf5f6bbeac2a9c4e7876b93b19939a196b4a9590f571d",
+   "weights_bytes": 6226474,
+   "wall_time_seconds": 16067
+  },
+  "temporal_coco": {
+   "generated_utc": "2026-10-14T06:10:55+00:00",
+   "detector": "yolov8n-coco",
+   "dataset": "ATMA-V (data/manifests/atmav/manifest.json)",
+   "train": {
+    "videos": 32,
+    "frames": 8336,
+    "anomalous_frames": 3576
+   },
+   "val": {
+    "videos": 12,
+    "frames": 5191,
+    "anomalous_frames": 3185
+   },
+   "selection": [
+    {
+     "features": "all",
+     "C": 0.003,
+     "train_auc": 0.8036,
+     "val_auc": 0.5516
+    },
+    {
+     "features": "all",
+     "C": 0.01,
+     "train_auc": 0.8211,
+     "val_auc": 0.5605
+    },
+    {
+     "features": "all",
+     "C": 0.03,
+     "train_auc": 0.8337,
+     "val_auc": 0.5595
+    },
+    {
+     "features": "all",
+     "C": 0.1,
+     "train_auc": 0.846,
+     "val_auc": 0.545
+    },
+    {
+     "features": "all",
+     "C": 0.3,
+     "train_auc": 0.8563,
+     "val_auc": 0.5309
+    },
+    {
+     "features": "all",
+     "C": 1.0,
+     "train_auc": 0.8638,
+     "val_auc": 0.5226
+    },
+    {
+     "features": "all",
+     "C": 3.0,
+     "train_auc": 0.867,
+     "val_auc": 0.5238
+    },
+    {
+     "features": "all",
+     "C": 10.0,
+     "train_auc": 0.8683,
+     "val_auc": 0.5331
+    },
+    {
+     "features": "image_cues",
+     "C": 0.003,
+     "train_auc": 0.7345,
+     "val_auc": 0.6683
+    },
+    {
+     "features": "image_cues",
+     "C": 0.01,
+     "train_auc": 0.7565,
+     "val_auc": 0.7062
+    },
+    {
+     "features": "image_cues",
+     "C": 0.03,
+     "train_auc": 0.7701,
+     "val_auc": 0.7278
+    },
+    {
+     "features": "image_cues",
+     "C": 0.1,
+     "train_auc": 0.7868,
+     "val_auc": 0.7486
+    },
+    {
+     "features": "image_cues",
+     "C": 0.3,
+     "train_auc": 0.8034,
+     "val_auc": 0.763
+    },
+    {
+     "features": "image_cues",
+     "C": 1.0,
+     "train_auc": 0.8147,
+     "val_auc": 0.7697
+    },
+    {
+     "features": "image_cues",
+     "C": 3.0,
+     "train_auc": 0.8199,
+     "val_auc": 0.7713
+    },
+    {
+     "features": "image_cues",
+     "C": 10.0,
+     "train_auc": 0.8222,
+     "val_auc": 0.7713
+    },
+    {
+     "features": "behaviour",
+     "C": 0.003,
+     "train_auc": 0.7599,
+     "val_auc": 0.5934
+    },
+    {
+     "features": "behaviour",
+     "C": 0.01,
+     "train_auc": 0.78,
+     "val_auc": 0.5761
+    },
+    {
+     "features": "behaviour",
+     "C": 0.03,
+     "train_auc": 0.7906,
+     "val_auc": 0.5518
+    },
+    {
+     "features": "behaviour",
+     "C": 0.1,
+     "train_auc": 0.7957,
+     "val_auc": 0.5414
+    },
+    {
+     "features": "behaviour",
+     "C": 0.3,
+     "train_auc": 0.7998,
+     "val_auc": 0.5427
+    },
+    {
+     "features": "behaviour",
+     "C": 1.0,
+     "train_auc": 0.8034,
+     "val_auc": 0.546
+    },
+    {
+     "features": "behaviour",
+     "C": 3.0,
+     "train_auc": 0.8061,
+     "val_auc": 0.5416
+    },
+    {
+     "features": "behaviour",
+     "C": 10.0,
+     "train_auc": 0.8077,
+     "val_auc": 0.5373
+    }
+   ],
+   "chosen": {
+    "features": "image_cues",
+    "C": 3.0,
+    "val_auc": 0.7713,
+    "threshold": 0.436,
+    "val_youden_j": 0.4357,
+    "threshold_rule": "max Youden J (TPR - FPR) on val"
+   },
+   "top_coefficients": [
+    {
+     "feature": "mean_motion",
+     "coef": -16.1415
+    },
+    {
+     "feature": "mean_motion_zone",
+     "coef": 15.292
+    },
+    {
+     "feature": "mean_sharpness",
+     "coef": -2.3217
+    },
+    {
+     "feature": "max_sharpness",
+     "coef": 2.3152
+    },
+    {
+     "feature": "max_no_person_motion",
+     "coef": 2.0644
+    },
+    {
+     "feature": "mean_sharpness_drop",
+     "coef": -0.8903
+    },
+    {
+     "feature": "mean_no_person_motion",
+     "coef": 0.7732
+    },
+    {
+     "feature": "max_motion_zone",
+     "coef": 0.7393
+    },
+    {
+     "feature": "max_brightness",
+     "coef": -0.5385
+    },
+    {
+     "feature": "max_motion",
+     "coef": -0.2463
+    },
+    {
+     "feature": "max_brightness_drop",
+     "coef": 0.1873
+    },
+    {
+     "feature": "mean_brightness",
+     "coef": 0.1723
+    },
+    {
+     "feature": "mean_brightness_drop",
+     "coef": -0.0621
+    },
+    {
+     "feature": "max_sharpness_drop",
+     "coef": 0.0323
+    },
+    {
+     "feature": "mean_persons_zone",
+     "coef": 0.0
+    }
+   ],
+   "note": "test split not used; see reports/pipeline for held-out results"
+  },
+  "temporal_sentinelx": {
+   "generated_utc": "2026-10-14T10:13:51+00:00",
+   "detector": "sentinelx-det-v1",
+   "dataset": "ATMA-V (data/manifests/atmav/manifest.json)",
+   "train": {
+    "videos": 32,
+    "frames": 8336,
+    "anomalous_frames": 3576
+   },
+   "val": {
+    "videos": 12,
+    "frames": 5191,
+    "anomalous_frames": 3185
+   },
+   "selection": [
+    {
+     "features": "all",
+     "C": 0.003,
+     "train_auc": 0.8184,
+     "val_auc": 0.7036
+    },
+    {
+     "features": "all",
+     "C": 0.01,
+     "train_auc": 0.8358,
+     "val_auc": 0.7036
+    },
+    {
+     "features": "all",
+     "C": 0.03,
+     "train_auc": 0.8464,
+     "val_auc": 0.7101
+    },
+    {
+     "features": "all",
+     "C": 0.1,
+     "train_auc": 0.8566,
+     "val_auc": 0.7202
+    },
+    {
+     "features": "all",
+     "C": 0.3,
+     "train_auc": 0.8671,
+     "val_auc": 0.7296
+    },
+    {
+     "features": "all",
+     "C": 1.0,
+     "train_auc": 0.877,
+     "val_auc": 0.7378
+    },
+    {
+     "features": "all",
+     "C": 3.0,
+     "train_auc": 0.8821,
+     "val_auc": 0.741
+    },
+    {
+     "features": "all",
+     "C": 10.0,
+     "train_auc": 0.8842,
+     "val_auc": 0.7404
+    },
+    {
+     "features": "image_cues",
+     "C": 0.003,
+     "train_auc": 0.7681,
+     "val_auc": 0.7715
+    },
+    {
+     "features": "image_cues",
+     "C": 0.01,
+     "train_auc": 0.7775,
+     "val_auc": 0.7891
+    },
+    {
+     "features": "image_cues",
+     "C": 0.03,
+     "train_auc": 0.7869,
+     "val_auc": 0.7993
+    },
+    {
+     "features": "image_cues",
+     "C": 0.1,
+     "train_auc": 0.8031,
+     "val_auc": 0.8099
+    },
+    {
+     "features": "image_cues",
+     "C": 0.3,
+     "train_auc": 0.8201,
+     "val_auc": 0.8193
+    },
+    {
+     "features": "image_cues",
+     "C": 1.0,
+     "train_auc": 0.8316,
+     "val_auc": 0.8211
+    },
+    {
+     "features": "image_cues",
+     "C": 3.0,
+     "train_auc": 0.8353,
+     "val_auc": 0.8179
+    },
+    {
+     "features": "image_cues",
+     "C": 10.0,
+     "train_auc": 0.8367,
+     "val_auc": 0.8154
+    },
+    {
+     "features": "behaviour",
+     "C": 0.003,
+     "train_auc": 0.7608,
+     "val_auc": 0.7407
+    },
+    {
+     "features": "behaviour",
+     "C": 0.01,
+     "train_auc": 0.7775,
+     "val_auc": 0.7384
+    },
+    {
+     "features": "behaviour",
+     "C": 0.03,
+     "train_auc": 0.7847,
+     "val_auc": 0.7368
+    },
+    {
+     "features": "behaviour",
+     "C": 0.1,
+     "train_auc": 0.7899,
+     "val_auc": 0.7357
+    },
+    {
+     "features": "behaviour",
+     "C": 0.3,
+     "train_auc": 0.792,
+     "val_auc": 0.7348
+    },
+    {
+     "features": "behaviour",
+     "C": 1.0,
+     "train_auc": 0.7937,
+     "val_auc": 0.7346
+    },
+    {
+     "features": "behaviour",
+     "C": 3.0,
+     "train_auc": 0.7948,
+     "val_auc": 0.7349
+    },
+    {
+     "features": "behaviour",
+     "C": 10.0,
+     "train_auc": 0.7958,
+     "val_auc": 0.7354
+    }
+   ],
+   "chosen": {
+    "features": "image_cues",
+    "C": 1.0,
+    "val_auc": 0.8211,
+    "threshold": 0.36,
+    "val_youden_j": 0.505,
+    "threshold_rule": "max Youden J (TPR - FPR) on val"
+   },
+   "top_coefficients": [
+    {
+     "feature": "mean_motion",
+     "coef": -11.5114
+    },
+    {
+     "feature": "mean_motion_zone",
+     "coef": 10.3743
+    },
+    {
+     "feature": "max_motion_zone",
+     "coef": 3.8697
+    },
+    {
+     "feature": "max_motion",
+     "coef": -3.4812
+    },
+    {
+     "feature": "mean_sharpness",
+     "coef": -1.9316
+    },
+    {
+     "feature": "max_sharpness",
+     "coef": 1.7822
+    },
+    {
+     "feature": "max_no_person_motion",
+     "coef": 1.4875
+    },
+    {
+     "feature": "mean_no_person_motion",
+     "coef": 1.3179
+    },
+    {
+     "feature": "mean_sharpness_drop",
+     "coef": -1.0871
+    },
+    {
+     "feature": "max_brightness_drop",
+     "coef": -0.7146
+    },
+    {
+     "feature": "max_sharpness_drop",
+     "coef": 0.5624
+    },
+    {
+     "feature": "mean_brightness_drop",
+     "coef": 0.4653
+    },
+    {
+     "feature": "mean_brightness",
+     "coef": -0.3229
+    },
+    {
+     "feature": "max_brightness",
+     "coef": -0.1091
+    },
+    {
+     "feature": "mean_persons_zone",
+     "coef": 0.0
+    }
+   ],
+   "note": "test split not used; see reports/pipeline for held-out results"
+  }
+ }
+}

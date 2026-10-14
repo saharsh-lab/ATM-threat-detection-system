@@ -7,7 +7,8 @@ export const RULE_LABELS = {
   multiple_persons: "Multiple persons", close_proximity: "Close proximity", loitering: "Loitering",
   vandalism: "Tampering posture", rapid_motion: "Rapid motion", weapon: "Bladed weapon", firearm: "Firearm",
   blunt_tool: "Blunt tool", face_concealment: "Face concealment", threat_object: "Suspicious object",
-  unattended_bag: "Unattended bag", restricted_zone: "Restricted zone",
+  unattended_bag: "Unattended bag", restricted_zone: "Restricted zone", camera_tamper: "Camera tampering",
+  learned_anomaly: "Learned temporal anomaly",
 };
 const LEVELS = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 let unmount = null, timer = null, level = "NORMAL";

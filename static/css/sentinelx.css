@@ -255,7 +255,7 @@ textarea.input { resize: vertical; min-height: 84px; }
 .feed-corner.br { right: 8px; bottom: 8px; border-left: 0; border-top: 0; }
 .feed-toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
 .gauge { display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: center; }
-.gauge svg { width: 132px; height: 132px; }
+.gauge > svg { width: 132px; height: 132px; }
 .gauge .track { stroke: var(--surface-3); }
 .gauge .fill { transition: stroke-dashoffset .6s var(--ease), stroke .4s; }
 .gauge-num { font: 650 34px/1 var(--font-display); fill: var(--text); }
@@ -380,7 +380,7 @@ td.wrap { white-space: normal; min-width: 220px; }
   .hero-viz { min-height: 200px; border-left: 0; border-top: 1px solid var(--border); }
   .kv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gauge { grid-template-columns: 110px 1fr; }
-  .gauge svg { width: 110px; height: 110px; }
+  .gauge > svg { width: 110px; height: 110px; }
   .login-page { grid-template-columns: minmax(0, 1fr); }
   .login-art { min-height: 280px; border-right: 0; border-bottom: 1px solid var(--border); }
   .login-art .caption { left: 16px; right: 16px; bottom: 20px; }
