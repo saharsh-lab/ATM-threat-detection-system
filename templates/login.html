@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SentinelX · Sign in</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/sentinelx-mark.svg') }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sentinelx.css') }}">
+</head>
+<body data-mode="{{ mode }}" data-csrf="{{ csrf }}">
+<div class="login-page">
+  <section class="login-art" aria-hidden="true">
+    <canvas id="login-wireframe"></canvas>
+    <div class="caption">
+      <h1>Sentinel<span style="color:var(--red)">X</span></h1>
+      <p>Detection, tracking and behavioural threat scoring for ATM vestibules, with an auditable incident trail.</p>
+    </div>
+  </section>
+  <section class="login-form">
+    <h2>Operator sign in</h2>
+    <p class="muted" style="margin:0">Surveillance footage and incident evidence are restricted. Every sign-in and evidence view is recorded in the audit log.</p>
+    <form id="login" novalidate>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <label class="field">Username
+          <input class="input" name="username" autocomplete="username" required maxlength="64" autofocus>
+        </label>
+        <label class="field">Password
+          <input class="input" name="password" type="password" autocomplete="current-password" required maxlength="256">
+        </label>
+        <div class="error-text" id="login-error" role="alert"></div>
+        <button class="btn primary" type="submit">Sign in</button>
+      </div>
+    </form>
+    <p class="muted" style="font-size:12px;margin:0">No account yet? Create one on the server: <span class="mono">python manage.py create-user &lt;name&gt; --role admin</span></p>
+  </section>
+</div>
+<script type="module" src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
       "src": "api/index.py",
       "use": "@vercel/python",
       "config": {
-        "excludeFiles": "{data/**,venv/**,venv_mac/**,ATM-Threat-Detection-System/**,content-recommendation-engine/**,*.pt,export_timeline.py}"
+        "excludeFiles": "{data/**,datasets/**,runs/**,instance/**,models/**,ml/**,tests/**,db/**,core/**,web/**,utils/**,reports/**,docs/**,venv/**,venv_mac/**,ATM-Threat-Detection-System/**,content-recommendation-engine/**,*.pt,export_timeline.py,manage.py,app.py}"
       }
     }
   ],
